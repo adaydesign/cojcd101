@@ -17,9 +17,8 @@ $id_card = "112232388760";
 $email   = "moois@mail.com";
 $username = "moisoe";
 $password = md5("dk90875$dh");
-$register_date = "now()";
 $result = $conn->query("INSERT INTO tb_users (id_card,email,username,password,register_date) 
-VALUES ('$id_card','$email','$username','$password',$register_date)");
+VALUES ('$id_card','$email','$username','$password',NOW())");
 echo $conn->insert_id;
 echo "<br>";
 echo $result ? "เพิ่มข้อมูลได้สำเร็จ":"ไม่สามารถเพิ่มข้อมูลได้";
