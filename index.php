@@ -12,7 +12,18 @@ $password = $url["pass"];
 $db = substr($url["path"], 1);
 print_r($url);
 $conn = new mysqli($server, $username, $password, $db);
-$result = $conn->query("SELECT * FROM tb_users");
-echo $result->num_rows;
+
+$id_card = "112200382220";
+$email   = "gooois@mail.com";
+$username = "goooisoe";
+$password = md5("dkkEiXowdh");
+$register_date = "now()";
+$result = $conn->query("INSERT INTO tb_users (id_card,email,username,password,register_date) 
+VALUES ('$id_card','$email','$username','$password','$register_date')");
+echo $conn->insert_id;
+echo "<br>";
+echo $result ? "เพิ่มข้อมูลได้สำเร็จ":"ไม่สามารถเพิ่มข้อมูลได้";
+
+
 
 ?>
