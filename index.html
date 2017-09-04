@@ -41,8 +41,8 @@
             <h1 class="cover-heading">ระบบบริหารอาคารที่พักศาลยุติธรรม (เขตกรุงเทพฯ)</h1>
             <p class="lead">ระบบช่วยอำนวยความสะดวกให้แก่ข้าราชการศาลยุติธรรมที่ต้องการจองที่พักอาศัยในเขตกรุงเทพมหานคร พร้อมบริการการรับแจ้งค่าบิลรายเดือนและแจ้งคุรุภัณฑ์ชำรุด</p>
             <p class="lead">
-              <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#login_modal"><i class="fa fa-pencil" aria-hidden="true"></i> สมัครสมาชิก</button>
-              <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i> เข้าสู่ระบบ</button>
+              <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#register_modal"><i class="fa fa-pencil" aria-hidden="true"></i> สมัครสมาชิก</button>
+              <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#login_modal"><i class="fa fa-user-circle-o" aria-hidden="true"></i> เข้าสู่ระบบ</button>
             </p>
           </div>
 
@@ -53,12 +53,12 @@
           </div>
 
 
-          <!-- Modal -->
-          <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label" aria-hidden="true">
+          <!-- Modal : Register -->
+          <div class="modal fade" id="register_modal" tabindex="-1" role="dialog" aria-labelledby="register_modal_label" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content" style="color:#000;text-shadow:none;text-align: left;">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="login_modal_label"><i class="fa fa-pencil" aria-hidden="true"></i> สมัครสมาชิก</h5>
+                  <h5 class="modal-title" id="register_modal_label"><i class="fa fa-pencil" aria-hidden="true"></i> สมัครสมาชิก</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -109,6 +109,44 @@
               </div>
             </div>
           </div>
+          <!-- End Modal : Register -->
+
+          <!-- Modal : Register -->
+          <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color:#000;text-shadow:none;text-align: left;">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="login_modal_label"><i class="fa fa-user-circle-o" aria-hidden="true"></i> เข้าสู่ระบบ</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="form_register">
+                    <!-- username -->
+                    <div class="form-group row">
+                      <label for="login_username" class="col-sm-3 col-form-label">ชื่อผู้ใช้งาน</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="login_username" id="login_username" placeholder="ชื่อผู้ใช้งาน">
+                      </div>
+                    </div>
+                    <!-- password -->
+                    <div class="form-group row">
+                      <label for="login_password1" class="col-sm-3 col-form-label">รหัสผ่าน</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="login_password1" id="login_password1" placeholder="รหัสผ่าน">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                  <button type="button" class="btn btn-primary">เข้าสู่ระบบ</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Modal : Register -->
 
         </div>
       </div>
