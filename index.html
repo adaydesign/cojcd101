@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="assets/images/favicon.ico">
@@ -14,45 +15,103 @@
 
     <!-- Custom styles for this template -->
     <link href="assets/css/cover.css" rel="stylesheet">
+    <link href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
   </head>
 
   <body>
 
     <div class="site-wrapper">
-
       <div class="site-wrapper-inner">
 
         <div class="cover-container">
-
           <div class="masthead clearfix">
             <div class="inner">
               <h3 class="masthead-brand">COJ CONDO</h3>
               <nav class="nav nav-masthead">
-                <a class="nav-link active" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link active" href="#">หน้าแรก</a>
+                <a class="nav-link" href="#">วิธีการใช้งาน</a>
+                <a class="nav-link" href="#">ลำดับการจองที่พัก</a>
               </nav>
             </div>
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
+            <h1 class="cover-heading">ระบบบริหารอาคารที่พักศาลยุติธรรม (เขตกรุงเทพฯ)</h1>
+            <p class="lead">ระบบช่วยอำนวยความสะดวกให้แก่ข้าราชการศาลยุติธรรมที่ต้องการจองที่พักอาศัยในเขตกรุงเทพมหานคร พร้อมบริการการรับแจ้งค่าบิลรายเดือนและแจ้งคุรุภัณฑ์ชำรุด</p>
             <p class="lead">
-              <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+              <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#login_modal"><i class="fa fa-pencil" aria-hidden="true"></i> สมัครสมาชิก</button>
+              <button type="button" class="btn btn-lg btn-primary" data-toggle="modal" data-target="#"><i class="fa fa-user-circle-o" aria-hidden="true"></i> เข้าสู่ระบบ</button>
             </p>
           </div>
 
           <div class="mastfoot">
             <div class="inner">
-              <p>Cover template for <a href="https://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+              <p>ระบบบริหารอาคารที่พักศาลยุติธรรม (เขตกรุงเทพฯ) พัฒนาโดย <a href="#">คณะทำงานกลุ่ม 5</a>.</p>
+            </div>
+          </div>
+
+
+          <!-- Modal -->
+          <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content" style="color:#000;text-shadow:none;text-align: left;">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="login_modal_label"><i class="fa fa-pencil" aria-hidden="true"></i> สมัครสมาชิก</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form id="form_register">
+                    <!-- username -->
+                    <div class="form-group row">
+                      <label for="input_username" class="col-sm-3 col-form-label">ชื่อผู้ใช้งาน</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="input_username" id="input_username" placeholder="ตั้งชื่อผู้ใช้งาน">
+                      </div>
+                    </div>
+                    <!-- password -->
+                    <div class="form-group row">
+                      <label for="input_password1" class="col-sm-3 col-form-label">รหัสผ่าน</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="input_password1" id="input_password1" placeholder="ตั้งรหัสผ่าน">
+                      </div>
+                    </div>
+                    <!-- password -->
+                    <div class="form-group row">
+                      <label for="input_password2" class="col-sm-3 col-form-label">ยืนยัน</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" name="input_password2" id="input_password2" placeholder="ยืนยันรหัสผ่าน">
+                      </div>
+                    </div>
+                    <!-- email -->
+                    <div class="form-group row">
+                      <label for="input_email" class="col-sm-3 col-form-label">อีเมล</label>
+                      <div class="col-sm-9">
+                        <input type="email" class="form-control" name="input_email" id="input_email" placeholder="ใส่อีเมล">
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <label for="recp" class="col-sm-3 col-form-label"></label>
+                      <div class="col-sm-9">
+                          <div class="g-recaptcha" data-sitekey="6LdpTy8UAAAAALTweF0e2veaXUC3N8imx3zAr2Ru"></div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                  <button type="button" class="btn btn-primary">สมัครสมาชิก</button>
+                </div>
+              </div>
             </div>
           </div>
 
         </div>
-
       </div>
-
     </div>
 
     <!-- Bootstrap core JavaScript
