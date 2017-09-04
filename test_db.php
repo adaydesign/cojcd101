@@ -3,9 +3,11 @@ echo "Test clone db data...";
 echo "<hr>";
 
 /*
-// true = local host, false = deploy on server
+// Debug config
+// true = local host, 
+// false = deploy on server
 */
-$debug = false; 
+$debug = true; 
 
 
 //$CLEARDB_DATABASE_URL = "mysql://bf60e5c13b1643:ffdf89ba@us-cdbr-iron-east-05.cleardb.net/heroku_733e7485a90f5eb?reconnect=true";
