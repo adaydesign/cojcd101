@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php 
+  include_once "include/config.php"; 
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -49,7 +52,7 @@
 
           <div class="mastfoot">
             <div class="inner">
-              <p>ระบบบริหารอาคารที่พักศาลยุติธรรม (เขตกรุงเทพฯ) พัฒนาโดย <a href="#">คณะทำงานกลุ่ม 5</a>.</p>
+              <p>ระบบบริหารอาคารที่พักศาลยุติธรรม (เขตกรุงเทพฯ) เวอร์ชั่น <?php echo SYS_VERSION;?> พัฒนาโดย <a href="#">คณะทำงานกลุ่ม 5</a>.</p>
             </div>
           </div>
 
@@ -80,7 +83,7 @@
                     <div class="form-group row">
                       <label for="input_username" class="col-sm-3 col-form-label">ชื่อผู้ใช้งาน</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="input_username" id="input_username" maxlength="40" placeholder="ตั้งชื่อผู้ใช้งาน" required>
+                        <input type="text" class="form-control" name="input_username" id="input_username" maxlength="20" placeholder="ตั้งชื่อผู้ใช้งาน" required>
                       </div>
                     </div>
                     
@@ -88,7 +91,7 @@
                     <div class="form-group row">
                       <label for="input_password1" class="col-sm-3 col-form-label">รหัสผ่าน</label>
                       <div class="col-sm-9">
-                        <input type="password" class="form-control" name="input_password1" id="input_password1" maxlength="40" placeholder="ตั้งรหัสผ่าน" required>
+                        <input type="password" class="form-control" name="input_password1" id="input_password1" maxlength="20" placeholder="ตั้งรหัสผ่าน" required>
                       </div>
                     </div>
                     
@@ -96,7 +99,7 @@
                     <div class="form-group row">
                       <label for="input_password2" class="col-sm-3 col-form-label">ยืนยันรหัสผ่าน</label>
                       <div class="col-sm-9">
-                        <input type="password" class="form-control" name="input_password2" id="input_password2" maxlength="40" placeholder="ยืนยันรหัสผ่าน" required>
+                        <input type="password" class="form-control" name="input_password2" id="input_password2" maxlength="20" placeholder="ยืนยันรหัสผ่าน" required>
                       </div>
                     </div>
                     
@@ -156,28 +159,36 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
-                  <form id="form_register">
+                <form id="form_login">
+                  <div class="modal-body">
+                    <!-- alert -->
+                    <div class="form-group row">
+                      <div class="col" id="alert_login" style="display:none;">
+                        <!--<div class="alert alert-primary" role="alert">
+                          This is a primary alert—check it out!
+                        </div>-->
+                      </div>
+                    </div>
                     <!-- username -->
                     <div class="form-group row">
                       <label for="login_username" class="col-sm-3 col-form-label">ชื่อผู้ใช้งาน</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="login_username" id="login_username" placeholder="ชื่อผู้ใช้งาน">
+                        <input type="text" class="form-control" name="login_username" id="login_username" maxlength="20" placeholder="ชื่อผู้ใช้งาน" required>
                       </div>
                     </div>
                     <!-- password -->
                     <div class="form-group row">
                       <label for="login_password1" class="col-sm-3 col-form-label">รหัสผ่าน</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="login_password1" id="login_password1" placeholder="รหัสผ่าน">
+                        <input type="password" class="form-control" name="login_password" id="login_password" maxlength="20" placeholder="รหัสผ่าน" required>
                       </div>
                     </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                  <button type="button" class="btn btn-primary">เข้าสู่ระบบ</button>
-                </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" class="btn btn-primary">เข้าสู่ระบบ</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
@@ -214,33 +225,35 @@
               type: "POST",
               data: values,
               success: function(response){
-                  //console.log(response);
+                  // console.log(response);
                   var obj = JSON.parse(response);
-
-                  console.log(obj.result);
-
+                  // console.log(obj.result);
+                  var form = obj.form;
                   var alert_color = "alert-warning";
-                  if(obj.result==false){
-                    // if false, reset current recaptcha widget_id
-                    // https://developers.google.com/recaptcha/docs/display
-                    grecaptcha.reset();
-                  }else{
-                    // success
-                    alert_color = "alert-success";
-                    
-                    // reset form, recaptcha
-                    $("#form_register")[0].reset();
-                    grecaptcha.reset();
-                    //
-                    window.setTimeout(function() {
-                      $("#alert_reg").fadeTo(500, 0).slideUp(500, function(){
-                          $(this).remove();
-                          $("#register_modal").modal('hide');
-                      });
-                    }, 3000);
-                  }
 
-                  var msg = "<div class='alert "+alert_color+"' role='alert'>"+obj.message+"</div>";
+                  if(form=="register"){
+                    if(obj.result==false){
+                      // if false, reset current recaptcha widget_id
+                      // https://developers.google.com/recaptcha/docs/display
+                      grecaptcha.reset();
+                    }else{
+                      // success
+                      alert_color = "alert-success";
+                      
+                      // reset form, recaptcha
+                      $("#form_register")[0].reset();
+                      grecaptcha.reset();
+                      
+                      window.setTimeout(function() {
+                        $("#alert_reg").fadeTo(500, 0).slideUp(500, function(){
+                            $(this).remove();
+                            $("#register_modal").modal('hide');
+                        });
+                      }, 2000);
+                    }
+                  }
+                  
+                  var msg = "<div class='alert "+alert_color+" text-center' role='alert'>"+obj.message+"</div>";
                   $("#alert_reg").html(msg);
                   $("#alert_reg").show();
 
@@ -250,7 +263,56 @@
               }
           });
         
-    });
+        });
+
+        // form login
+        $("#form_login").submit(function(event){
+          // Stop form from submitting normally
+          event.preventDefault();
+
+          var url_link = "action/act_login.php";
+          var values   = $(this).serialize();
+
+          $.ajax({
+              url : url_link,
+              type: "POST",
+              data: values,
+              success: function(response){
+                  // console.log(response);
+                  var obj = JSON.parse(response);
+                  // console.log(obj.result);
+                  var form = obj.form;
+                  var alert_color = "alert-danger";
+                  var icon = "";
+                  if(form=="login"){
+                    if(obj.result==true){
+                      alert_color = "alert-success";
+                      icon = " <i class='fa fa-circle-o-notch fa-spin fa-fw'></i><span class='sr-only'>Loading...</span>";
+                      window.setTimeout(function() {
+                        $("#alert_login").fadeTo(500, 0).slideUp(500, function(){
+                            $(this).remove();
+                            $("#login_modal").modal('hide');
+
+                            // redirect
+
+                        });
+                      }, 2000);
+                    }else{
+                      $("#login_password").val("");
+                    }
+                  }
+                  
+                  var msg = "<div class='alert "+alert_color+" text-center' role='alert'>"+obj.message+icon+"</div>";
+                  $("#alert_login").html(msg);
+                  $("#alert_login").show();
+
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                  console.log(textStatus, errorThrown);
+              }
+          });
+        
+        });
 
       });
 
