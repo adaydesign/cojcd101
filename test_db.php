@@ -9,7 +9,6 @@ echo "<hr>";
 */
 $debug = true; 
 
-
 //$CLEARDB_DATABASE_URL = "mysql://bf60e5c13b1643:ffdf89ba@us-cdbr-iron-east-05.cleardb.net/heroku_733e7485a90f5eb?reconnect=true";
 //$url = parse_url(getenv($CLEARDB_DATABASE_URL));
 $url_var = "mysql://cojcd_admin:nffuF5S5Y9GUP5yw@localhost/heroku_733e7485a90f5eb";
