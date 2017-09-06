@@ -292,7 +292,7 @@
                         $("#alert_login").fadeTo(500, 0).slideUp(500, function(){
                             $(this).remove();
                             $("#login_modal").modal('hide');
-
+                            $("#form_login")[0].reset();
                             // redirect
 
                         });
