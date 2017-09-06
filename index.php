@@ -18,6 +18,7 @@
     <link href="assets/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <script src='https://www.google.com/recaptcha/api.js'></script>
+
   </head>
 
   <body>
@@ -63,55 +64,89 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
-                  <form id="form_register">
+                <form id="form_register">
+                  <div class="modal-body">
+
+                    <!-- alert -->
+                    <div class="form-group row">
+                      <div class="col" id="alert_reg" style="display:none;">
+                        <!--<div class="alert alert-primary" role="alert">
+                          This is a primary alert—check it out!
+                        </div>-->
+                      </div>
+                    </div>
+
                     <!-- username -->
                     <div class="form-group row">
                       <label for="input_username" class="col-sm-3 col-form-label">ชื่อผู้ใช้งาน</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="input_username" id="input_username" placeholder="ตั้งชื่อผู้ใช้งาน">
+                        <input type="text" class="form-control" name="input_username" id="input_username" maxlength="40" placeholder="ตั้งชื่อผู้ใช้งาน" required>
                       </div>
                     </div>
+                    
                     <!-- password -->
                     <div class="form-group row">
                       <label for="input_password1" class="col-sm-3 col-form-label">รหัสผ่าน</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="input_password1" id="input_password1" placeholder="ตั้งรหัสผ่าน">
+                        <input type="password" class="form-control" name="input_password1" id="input_password1" maxlength="40" placeholder="ตั้งรหัสผ่าน" required>
                       </div>
                     </div>
-                    <!-- password -->
+                    
+                    <!-- confirm password -->
                     <div class="form-group row">
-                      <label for="input_password2" class="col-sm-3 col-form-label">ยืนยัน</label>
+                      <label for="input_password2" class="col-sm-3 col-form-label">ยืนยันรหัสผ่าน</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" name="input_password2" id="input_password2" placeholder="ยืนยันรหัสผ่าน">
+                        <input type="password" class="form-control" name="input_password2" id="input_password2" maxlength="40" placeholder="ยืนยันรหัสผ่าน" required>
                       </div>
                     </div>
+                    
                     <!-- email -->
                     <div class="form-group row">
                       <label for="input_email" class="col-sm-3 col-form-label">อีเมล</label>
                       <div class="col-sm-9">
-                        <input type="email" class="form-control" name="input_email" id="input_email" placeholder="ใส่อีเมล">
+                        <input type="email" class="form-control" name="input_email" id="input_email" maxlength="50" placeholder="ใส่อีเมล" required>
                       </div>
                     </div>
 
+                    <!-- Resident Status -->
+                    <div class="form-group row">
+                      <label class="col-sm-3 col-form-label">สถานะผู้พักอาศัย</label>
+                      <div class="col-sm-9">
+                          <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="input_role" value="0" checked>
+                                ต้องการยื่นขอจองอาคารที่พัก
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" name="input_role" value="1">
+                                เป็นผู้พักอาศัยอยู่เดิม
+                              </label>
+                            </div>
+                      </div>
+                    </div>
+                    
+                    <!-- CAPTCHA -->
                     <div class="form-group row">
                       <label for="recp" class="col-sm-3 col-form-label"></label>
                       <div class="col-sm-9">
-                          <div class="g-recaptcha" data-sitekey="6LdpTy8UAAAAALTweF0e2veaXUC3N8imx3zAr2Ru"></div>
+                        <!-- Google ReCaptcha Here -->
+                        <div class="g-recaptcha" data-sitekey="6LdpTy8UAAAAALTweF0e2veaXUC3N8imx3zAr2Ru"></div>
                       </div>
                     </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
-                  <button type="button" class="btn btn-primary">สมัครสมาชิก</button>
-                </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                    <button type="submit" id="submit_register" class="btn btn-primary">สมัครสมาชิก</button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
           <!-- End Modal : Register -->
 
-          <!-- Modal : Register -->
+          <!-- Modal : Login -->
           <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-labelledby="login_modal_label" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content" style="color:#000;text-shadow:none;text-align: left;">
@@ -146,7 +181,7 @@
               </div>
             </div>
           </div>
-          <!-- End Modal : Register -->
+          <!-- End Modal : Login -->
 
         </div>
       </div>
@@ -161,7 +196,64 @@
     <script src="lib/backstretch/jquery.backstretch.js"></script>
 
     <script>
-      $.backstretch("assets/images/bg101.jpg");
+      $(function(){
+
+        // backstretch
+        $.backstretch("assets/images/bg101.jpg");
+
+        // form register submit
+        $("#form_register").submit(function(event){
+          // Stop form from submitting normally
+          event.preventDefault();
+
+          var url_link = "action/act_register.php";
+          var values   = $(this).serialize();
+
+          $.ajax({
+              url : url_link,
+              type: "POST",
+              data: values,
+              success: function(response){
+                  //console.log(response);
+                  var obj = JSON.parse(response);
+
+                  console.log(obj.result);
+
+                  var alert_color = "alert-warning";
+                  if(obj.result==false){
+                    // if false, reset current recaptcha widget_id
+                    // https://developers.google.com/recaptcha/docs/display
+                    grecaptcha.reset();
+                  }else{
+                    // success
+                    alert_color = "alert-success";
+                    
+                    // reset form, recaptcha
+                    $("#form_register")[0].reset();
+                    grecaptcha.reset();
+                    //
+                    window.setTimeout(function() {
+                      $("#alert_reg").fadeTo(500, 0).slideUp(500, function(){
+                          $(this).remove();
+                          $("#register_modal").modal('hide');
+                      });
+                    }, 3000);
+                  }
+
+                  var msg = "<div class='alert "+alert_color+"' role='alert'>"+obj.message+"</div>";
+                  $("#alert_reg").html(msg);
+                  $("#alert_reg").show();
+
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                  console.log(textStatus, errorThrown);
+              }
+          });
+        
+    });
+
+      });
+
     </script>
 
   </body>
