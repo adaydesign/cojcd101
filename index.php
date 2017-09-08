@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<?php 
-  include_once "include/config.php"; 
-?>
+<?php include_once "include/config.php"; ?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -11,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="assets/images/favicon.ico">
 
-    <title>ระบบบริหารอาคารที่พักศาลยุติธรรมในเขตกรุงเทพ</title>
+    <title><?php echo SYS_NAME;?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -42,7 +40,7 @@
           </div>
 
           <div class="inner cover">
-            <h1 class="cover-heading">ระบบบริหารอาคารที่พักศาลยุติธรรม (เขตกรุงเทพฯ)</h1>
+            <h1 class="cover-heading"><?php echo SYS_NAME;?></h1>
             <p class="lead">ระบบช่วยอำนวยความสะดวกให้แก่ข้าราชการศาลยุติธรรมที่ต้องการจองที่พักอาศัยในเขตกรุงเทพมหานคร พร้อมบริการการรับแจ้งค่าบิลรายเดือนและแจ้งคุรุภัณฑ์ชำรุด</p>
             <p class="lead">
               <button type="button" class="btn btn-lg btn-secondary" data-toggle="modal" data-target="#register_modal"><i class="fa fa-pencil" aria-hidden="true"></i> สมัครสมาชิก</button>
@@ -52,7 +50,7 @@
 
           <div class="mastfoot">
             <div class="inner">
-              <p>ระบบบริหารอาคารที่พักศาลยุติธรรม (เขตกรุงเทพฯ) เวอร์ชั่น <?php echo SYS_VERSION;?> พัฒนาโดย <a href="#">คณะทำงานกลุ่ม 5</a>.</p>
+              <p><?php echo SYS_NAME;?> เวอร์ชั่น <?php echo SYS_VERSION;?> พัฒนาโดย <a href="#">คณะทำงานกลุ่ม 5</a>.</p>
             </div>
           </div>
 
@@ -278,7 +276,7 @@
               type: "POST",
               data: values,
               success: function(response){
-                  // console.log(response);
+                  //console.log(response);
                   var obj = JSON.parse(response);
                   // console.log(obj.result);
                   var form = obj.form;
@@ -293,8 +291,8 @@
                             $(this).remove();
                             $("#login_modal").modal('hide');
                             $("#form_login")[0].reset();
-                            // redirect
-
+                            // redirect to home page
+                            window.location.replace("home.php");
                         });
                       }, 2000);
                     }else{

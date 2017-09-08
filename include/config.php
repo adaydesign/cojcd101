@@ -1,10 +1,11 @@
 <?php
 
 //-------------------- System Version ------------------------------
-define("SYS_VERSION","0.3");
+define("SYS_NAME","ระบบบริหารจัดการอาคารที่พักศาลยุติธรรม");
+define("SYS_VERSION","0.4.2");
 
 //-------------------- Database connection -------------------------
-define("DB_LOCAL_TEST",false);
+define("DB_LOCAL_TEST",true);
 define("DB_OFFLINE_URL","mysql://cojcd_admin:nffuF5S5Y9GUP5yw@localhost/heroku_733e7485a90f5eb");
 //"mysql://bf60e5c13b1643:ffdf89ba@us-cdbr-iron-east-05.cleardb.net/heroku_733e7485a90f5eb"
 define("DB_ONLINE_URL","CLEARDB_DATABASE_URL");
