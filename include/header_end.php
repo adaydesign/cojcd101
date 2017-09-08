@@ -23,41 +23,79 @@
           <li class="nav-item">
             <a class="nav-link" href="#"><i class="fa fa-bars" aria-hidden="true"></i> ลำดับการจองห้องพัก</a>
           </li>
-          <!-- Member Services -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-archive" aria-hidden="true"></i> บริการสำหรับสมาชิก</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> ยื่นใบจองห้องพัก</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> ตรวจสอบบิลรายเดือน</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> แจ้งชำรุด</a>
-            </div>
-          </li>
-          <!-- Admin Menu -->
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-archive" aria-hidden="true"></i> เมนูสำหรับผู้ดูแลระบบ</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> รายการใบจองห้องพัก</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> จัดการข้อมูลห้องพัก</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> บิลรายเดือน</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> แจ้งชำรุด</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> ชื่อบัญชีผู้ใช้</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> ชื่อบัญชีกลุ่มผู้ดูแลระบบ</a>
-            </div>
-          </li>
+          
+          <?php
+          if($USER_LOGIN && $USER_GROUP===0){ ?>
+            <!-- Member Services -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-archive" aria-hidden="true"></i> บริการสำหรับสมาชิก</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <?php 
+                if($USER_STATE===0){ ?>
+                  <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> ยื่นใบจองห้องพัก</a>
+                  <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> สถานะใบจองห้องพัก</a>
+                <?php 
+                }else if($USER_STATE===1){ ?>
+                  <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> ตรวจสอบบิลรายเดือน</a>
+                  <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> แจ้งชำรุด</a>
+                <?php 
+                }?>
+              </div>
+            </li>
+          <?php
+          } ?>
+
+          <?php
+          if($USER_LOGIN && $USER_GROUP===1){ ?>
+            <!-- Admin Menu -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-archive" aria-hidden="true"></i> เมนูสำหรับผู้ดูแลระบบ</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> รายการใบจองห้องพัก</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> จัดการข้อมูลห้องพัก</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> บิลรายเดือน</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> แจ้งชำรุด</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> ชื่อบัญชีผู้ใช้</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> ชื่อบัญชีกลุ่มผู้ดูแลระบบ</a>
+              </div>
+            </li>
+          <?php
+          } ?>
 
         </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i> USER NAME</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#"><i class="fa fa-address-card-o" aria-hidden="true"></i> บัญชีผู้ใช้</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</a>
-              <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a>
-            </div>
-          </li>
-        </ul>
+
+        <?php
+        if($USER_LOGIN){
+          $display_user_name = !empty($USER_FULL_NAME)?$USER_FULL_NAME:$USER_NAME;
+        ?>
+          <!-- USER LOGIN -->
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i> <?php echo $display_user_name;?></a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="#"><i class="fa fa-address-card-o" aria-hidden="true"></i> บัญชีผู้ใช้</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a>
+              </div>
+            </li>
+          </ul>
+        <?php
+        }else{
+        ?>
+          <!-- NORMAL -->
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i> เข้าสู่ระบบ</a>
+              <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <a class="dropdown-item" href="#"><i class="fa fa-address-card-o" aria-hidden="true"></i> สมัครสมาชิก</a>
+                <a class="dropdown-item" href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> เข้าสู่ระบบ</a>
+              </div>
+            </li>
+          </ul>
+        <?php
+        }?>
         
       </div>
     </nav>

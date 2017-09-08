@@ -26,14 +26,13 @@
                 $result["message"]= "ยินดีต้อนรับ $l_username เข้าสู่ระบบ";
 
                 // KEEP IN SESSION Key and Value
-                $rs_rows = $db->resultset();
-                $rs0     = $rs_rows[0];
-                $_SESSION['user_id']    = $rs0['id'];
-                $_SESSION['username']   = $rs0['username'];
+                $rs_row = $db->singleResult();
+                $_SESSION['user_id']    = $rs_row['id'];
+                $_SESSION['username']   = $rs_row['username'];
 
             }else{
-                $result["result"] = false;
-                $result["message"]= "ชื่อผู้ใช้ หรือรหัสผ่าน ไม่ถูกต้อง";
+                $result["result"]  = false;
+                $result["message"] = "ชื่อผู้ใช้ หรือรหัสผ่าน ไม่ถูกต้อง";
             }
         }
 

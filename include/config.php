@@ -2,7 +2,7 @@
 
 //-------------------- System Version ------------------------------
 define("SYS_NAME","ระบบบริหารจัดการอาคารที่พักศาลยุติธรรม");
-define("SYS_VERSION","0.4.2");
+define("SYS_VERSION","0.4.3");
 
 //-------------------- Database connection -------------------------
 define("DB_LOCAL_TEST",true);

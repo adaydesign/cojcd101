@@ -71,12 +71,12 @@
 
         // PDO::FETCH_ASSOC
         // PDO::FETCH_NUM
-        public function resultset($fetch=PDO::FETCH_ASSOC){
+        public function resultSet($fetch=PDO::FETCH_ASSOC){
             $this->execute();
             return $this->stmt->fetchAll($fetch);
         }
 
-        public function single($fetch=PDO::FETCH_ASSOC){
+        public function singleResult($fetch=PDO::FETCH_ASSOC){
             $this->execute();
             return $this->stmt->fetch($fetch);
         }
