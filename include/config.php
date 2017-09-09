@@ -2,7 +2,8 @@
 
 //-------------------- System Version ------------------------------
 define("SYS_NAME","ระบบบริหารจัดการอาคารที่พักศาลยุติธรรม");
-define("SYS_VERSION","0.4.3");
+define("SYS_NAME_2","COJ CONDO");
+define("SYS_VERSION","0.5.2");
 
 //-------------------- Database connection -------------------------
 define("DB_LOCAL_TEST",true);
@@ -27,5 +28,12 @@ define("DB_NAME",$db_name);
 
 // echo DB_HOST." - ".DB_USER." - ".DB_PASS." - ".DB_NAME."<br>";
 
+//-------------------- PAGE TOP MENU CONSTANT ------------------------------------
+define("TOPMENU_INDEX_HOME",0);
+define("TOPMENU_INDEX_HELP",1);
+define("TOPMENU_INDEX_RESERVATION",2);
+define("TOPMENU_INDEX_MEMBER",3);
+define("TOPMENU_INDEX_ADMIN",4);
+define("TOPMENU_INDEX_USER_LOGIN",5);
 
 ?>

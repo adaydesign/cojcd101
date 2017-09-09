@@ -4,8 +4,8 @@
     
     <!-- Page Footer -->
     <footer class="footer">
-      <div class="container text-center">
-        <span class="text-muted"><?php echo SYS_NAME;?> เวอร์ชั่น <?php echo SYS_VERSION;?></span>
+      <div class="container">
+        <span class="text-muted">&copy; 2017, <?php echo SYS_NAME_2;?> เวอร์ชั่น <?php echo SYS_VERSION;?></span>
       </div>
     </footer>
 

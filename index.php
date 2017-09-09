@@ -1,3 +1,16 @@
+<?php
+  // check session, if required
+  if(!isset($_SESSION)) { 
+    session_start(); 
+  } 
+  if(isset($_SESSION['user_id']) && isset($_SESSION['username'])){
+    // require login
+    // redirect to
+    header("Location: main.php");
+    die();
+  }
+?>
+
 <!DOCTYPE html>
 <?php include_once "include/config.php"; ?>
 <html lang="en">
@@ -34,7 +47,7 @@
               <nav class="nav nav-masthead">
                 <a class="nav-link active" href="#">หน้าแรก</a>
                 <a class="nav-link" href="#">วิธีการใช้งาน</a>
-                <a class="nav-link" href="#">ลำดับการจองที่พัก</a>
+                <a class="nav-link" href="#">ลำดับผู้รอจัดสรรเข้าพักอาศัย</a>
               </nav>
             </div>
           </div>
@@ -292,7 +305,7 @@
                             $("#login_modal").modal('hide');
                             $("#form_login")[0].reset();
                             // redirect to home page
-                            window.location.replace("home.php");
+                            window.location.replace("main.php");
                         });
                       }, 2000);
                     }else{

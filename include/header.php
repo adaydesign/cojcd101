@@ -1,6 +1,7 @@
 <?php 
   include_once "include/config.php"; 
   include_once "include/user_session.php";
+  include_once "include/util_functions.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
