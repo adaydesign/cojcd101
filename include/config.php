@@ -1,7 +1,7 @@
 <?php
 
 //-------------------- System Version ------------------------------
-define("SYS_NAME","ระบบบริหารจัดการอาคารที่พักศาลยุติธรรม");
+define("SYS_NAME","ระบบบริหารจัดการห้องพักศาลยุติธรรม");
 define("SYS_NAME_2","COJ CONDO");
 define("SYS_VERSION","0.5.3");
 

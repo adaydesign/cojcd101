@@ -23,7 +23,7 @@
 <?php include_once "include/header_end.php"; ?>
 
 <!-- Content -->
-
+HELLO WORLD
 <?php
     include_once "main_m1.php";     // display main page of normal member
     include_once "main_m2.php";     // display main page of resident member
