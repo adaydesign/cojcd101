@@ -18,7 +18,7 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
 
                     <dt class="col-12 col-sm-4">ข้อมูลส่วนบุคคล</dt>
                     <dd class="col-6">..</dd>
-                    <dd class="col-2"><button class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไขข้อมูลส่วนตัว</button></dd>
+                    <dd class="col-2"><a href="profile_edit.php" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไขข้อมูลส่วนตัว</a></dd>
 
                     <dt class="col-12 col-sm-4">การเชื่อมโยง LINE Account</dt>
                     <dd class="col-6">..</dd>
