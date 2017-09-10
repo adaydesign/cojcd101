@@ -260,7 +260,7 @@
                             $(this).remove();
                             $("#register_modal").modal('hide');
                         });
-                      }, 2000);
+                      }, 1500);
                     }
                   }
                   
@@ -307,7 +307,7 @@
                             // redirect to home page
                             window.location.replace("main.php");
                         });
-                      }, 2000);
+                      }, 1500);
                     }else{
                       $("#login_password").val("");
                     }

@@ -27,9 +27,11 @@
 
 <!-- Content -->
 <?php
-    include_once "main_m1.php";     // display main page of normal member
-    include_once "main_m2.php";     // display main page of resident member
-    include_once "main_admin.php";  // display main page of admin
+    if($USER_LOGIN){
+        include_once "main_m1.php";     // display main page of normal member
+        include_once "main_m2.php";     // display main page of resident member
+        include_once "main_admin.php";  // display main page of admin
+    }
 ?>
 
 </div>

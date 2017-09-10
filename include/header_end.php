@@ -32,7 +32,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <?php 
                 if($USER_STATE===0){ ?>
-                  <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> ยื่นคำร้องขอเข้าพัก</a>
+                  <a class="dropdown-item" href="send_reserve_form.php"><i class="fa fa-check-circle-o" aria-hidden="true"></i> ยื่นคำร้องขอเข้าพัก</a>
                   <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> สถานะการยื่นคำร้อง</a>
                 <?php 
                 }else if($USER_STATE===1){ ?>

@@ -10,7 +10,7 @@
     $result     = array("form"=>"login","result"=>false,"message"=>"พบข้อผิดพลาด");
 
     if(!empty($l_username) && !empty($l_password)){
-        include_once "../include/config.php";
+        include_once "../include/db_connection.config.php";
         include_once "../model/database.class.php";
 
         $db = new Database();

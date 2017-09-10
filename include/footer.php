@@ -15,4 +15,5 @@
     <script src="lib/jquery/dist/jquery.min.js"></script>
     <script src="lib/popper.js/popper-1-11-0.min.js"></script>
     <script src="lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap.notify/bootstrap-notify.min.js"></script>
     

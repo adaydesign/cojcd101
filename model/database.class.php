@@ -101,6 +101,10 @@
             return $this->db->lastInsertId();
         }
 
+        public function debugDumpParams(){
+            return $this->stmt->debugDumpParams();
+        }
+
         public function close(){
             $this->stmt = null;
             $this->db   = null;

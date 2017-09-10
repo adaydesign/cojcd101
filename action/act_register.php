@@ -27,7 +27,7 @@
         if($res["success"]){
             // Password Verify
             if( strcmp($i_password,$i_pass_con)===0){
-                include_once "../include/config.php";
+                include_once "../include/db_connection.config.php";
                 include_once "../model/database.class.php";
 
                 // Check duplicate username
