@@ -33,7 +33,7 @@
                 <p class='text-secordary'><?php echo $USER_STATE_LABEL;?></p>
             </div>
             <div class="card-footer text-center">
-                <button class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไขข้อมูล</btn>
+                <a href="profile_edit.php"  class="btn btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไขข้อมูล</a>
             </div>
         </div>
     </div>
@@ -72,4 +72,5 @@
 <!-- Content -->
 
 <?php include_once "include/footer.php"; ?>
+
 <?php include_once "include/footer_end.php"; ?>
