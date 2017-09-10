@@ -1,5 +1,5 @@
 <?php
-/*
+
     // check session, if required
     if(!isset($_SESSION)) { 
         session_start(); 
@@ -18,14 +18,15 @@
     // Breadcrumb Setting
     // array("title"=>"link")
     $PAGE_BREAD_CRUMB = array();
-    */
+    
+    print_r($_SESSION);
 ?>
 
 <?php //include_once "include/header.php"; ?>
 <?php //include_once "include/header_end.php"; ?>
 
 <!-- Content -->
-HELLO WORLD
+HELLO WORLD #3
 <?php
     //include_once "main_m1.php";     // display main page of normal member
     //include_once "main_m2.php";     // display main page of resident member
