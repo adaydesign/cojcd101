@@ -7,7 +7,7 @@
     $position_input     = filter_input(INPUT_POST,"position_input",FILTER_SANITIZE_SPECIAL_CHARS);
     $level_input        = filter_input(INPUT_POST,"level_input",FILTER_SANITIZE_SPECIAL_CHARS);
     $user_id            = filter_input(INPUT_POST,"user_id",FILTER_SANITIZE_SPECIAL_CHARS);
-    $office_input          = filter_input(INPUT_POST,"office_input",FILTER_SANITIZE_SPECIAL_CHARS);
+    $office_input       = filter_input(INPUT_POST,"office_input",FILTER_SANITIZE_SPECIAL_CHARS);
     
     $result     = array("form"=>"edit_profile","result"=>false,"message"=>"พบข้อผิดพลาด");
 

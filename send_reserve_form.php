@@ -20,11 +20,6 @@
 ?>
 
 <?php include_once "include/header.php"; ?>
-
-<link href="http://hayageek.github.io/jQuery-Upload-File/4.0.11/uploadfile.css" rel="stylesheet">
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="http://hayageek.github.io/jQuery-Upload-File/4.0.11/jquery.uploadfile.min.js"></script>
-
 <?php include_once "include/header_end.php"; ?>
 
 <!-- Content-->
@@ -61,7 +56,7 @@
                 $db->close();
             
             ?>
-            <form id="send_reserve_form" method="POST">
+            <form id="send_reserve_form">
                 <div class="card-body">
                     <!-- Full Name -->
                     <div class="form-group row">
@@ -178,9 +173,12 @@
                             <input type="text" class="form-control" id="other_house_owner_is_label" name="other_house_owner_is_label" value="" placeholder="ชื่อรายการอื่นเพิ่มเติม" maxlength="100" >
                         </div>
                     </div>
-                    <hr>
+                    
                     <!-- ------------------------------------------------------- -->
                     <!-- select building -->
+                    <div class="form-group row bg-info">
+                        <label class="col col-form-label"><i class="fa fa-home" aria-hidden="true"></i> มีความประสงค์ขอเข้าพักอาศัยในอาคารที่พักข้าราชการศาลยุติธรรมในเขตกรุงเทพมหานคร</label>
+                    </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">มีความประสงค์ขอเข้าพักอาศัย</label>
                         <div class="col-sm-6">
@@ -200,18 +198,58 @@
                             </label>
                         </div>
                     </div>
-                    <hr>
+                    
                     <!-- ------------------------------------------------------- -->
-                    <div class="form-group row">
+                    <div class="form-group row bg-info">
                         <label class="col col-form-label"><i class="fa fa-file-text-o" aria-hidden="true"></i> แนบเอกสารที่เกี่ยวข้องเพื่อประกอบการพิจารณาดังนี้</label>
                     </div>
                     <div class="form-group row">
-                    <div id="fileuploader">Upload</div>
+                        <label class="col-sm-4 col-form-label">สำเนาบัตรข้าราชการ</label>
+                        <div class="col-sm-6">
+                            <input class="btn btn-sm" type="file" name="officer_card" id="officer_card" data-role="1">
+                            <span id="div_doc_1"></span>
+                            <input type="hidden" name="doc_1_path" id="doc_1_path">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">สำเนาทะเบียนบ้านของผู้ยื่นคำร้อง</label>
+                        <div class="col-sm-6">
+                            <input class="btn btn-sm" type="file" name="census" id="census" data-role="2">
+                            <span id="div_doc_2"></span>
+                            <input type="hidden" name="doc_2_path" id="doc_2_path">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">สำเนาทะเบียนสมรส</label>
+                        <div class="col-sm-6">
+                            <input class="btn btn-sm" type="file" name="marriage_license" id="marriage_license"  data-role="3" >
+                            <span id="div_doc_3"></span>
+                            <input type="hidden" name="doc_3_path" id="doc_3_path">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">สำเนาใบเปลี่ยนชื่อ ชื่อสกุล</label>
+                        <div class="col-sm-6">
+                            <input class="btn btn-sm" type="file" name="changed_name_cert" id="changed_name_cert"  data-role="4" >
+                            <span id="div_doc_4"></span>
+                            <input type="hidden" name="doc_4_path" id="doc_4_path">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">สำเนาทะเบียนบ้านเจ้าของบ้าน กรณีเป็นผู้อาศัยกรณีมีชื่ออยู่ในกรุงเทพมหานคร</label>
+                        <div class="col-sm-6">
+                            <input class="btn btn-sm" type="file" name="current_census" id="current_census"  data-role="5" >
+                            <span id="div_doc_5"></span>
+                            <input type="hidden" name="doc_5_path" id="doc_5_path">
+                        </div>
+                    </div>
+                    <div class="form-group row bg-light">
+                        <text class="text text-primary pl-3"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> อัพโหลดเฉพาะไฟล์นามสกุล .pdf เท่านั้น ขนาดไฟล์ไม่เกิน 400 Kb</text>
                     </div>
 
                 </div>
                 <div class="card-footer text-center">
-                    <button type="submit" class="btn btn-info"><i class="fa fa-floppy-o" aria-hidden="true"></i> บันทึกเอกสาร</button>
+                    <input type="hidden" value="<?php echo base64_encode($USER_ID);?>" name="user_id">
                     <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane-o" aria-hidden="true"></i> ส่งคำร้อง</button>
                     <button type="reset"  class="btn btn-secondary"><i class="fa fa-undo" aria-hidden="true"></i> รีเซ็ต</button>
                 </div>
@@ -222,11 +260,7 @@
 </div>
 
 <?php include_once "include/footer.php"; ?>
-<!-- http://hayageek.com/docs/jquery-upload-file.php
-     http://simpleupload.michaelcbrook.com/#examples -->
-<!--
-     <script type="text/javascript" src="lib/simpleUpload/simpleUpload.min.js"></script>
- -->
+
 <script>
     $(function(){
 
@@ -246,12 +280,103 @@
             }
         });
 
-        
-        $("#fileuploader").uploadFile({
-            url:"action/act_upload.php",
-            fileName:"myfile"
+        // file upload
+        $("#officer_card, #census, #marriage_license, #changed_name_cert, #current_census").change(function(event){
+            //var src = URL.createObjectURL(event.target.files[0]);
+            var src = event.target.files[0];
+            var fileName = src.name;
+            var fileType = src.type; // pdf : application/pdf
+            var fileSize = src.size; // < 400000
+            
+            if(fileType == "application/pdf"){
+                if(fileSize < 400000){
+                    var dest     = "../uploads/rsvform/";
+                    var role     = $(this).data("role");
+                    var url_link = "action/act_upload.php?role="+role+"&dest="+dest;
+                    var data     = new FormData();
+                    $.each($(this)[0].files,function(i,file){
+                        data.append('pdf_file',file);
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url : url_link,
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        success: function(response){
+                            // console.log(response);
+                            var obj = JSON.parse(response);
+
+                            if(obj.result==true){
+                                $("#div_doc_"+role).html("<text class='text text-success'><i class='fa fa-check-square-o' aria-hidden='true'></i></text>");
+                                $("#doc_"+role+"_path").val(obj.file_path);
+                            }else{
+                                $.notify({
+                                    title: "ไฟล์อัพโหลด",
+                                    message: obj.message
+                                },{ type: 'danger' });
+                                $(this).val('');
+                            }
+
+                        },error: function(jqXHR, textStatus, errorThrown){
+                            console.log(textStatus, errorThrown);
+                        }
+                    });
+
+                }else{
+                    $.notify({
+                        title: "ไฟล์อัพโหลด",
+                        message: "ขนาดไฟล์เกิน 400 Kb"
+                    },{ type: 'danger' });
+                    $(this).val('');
+                }
+                
+            }else{
+                $.notify({
+                    title: "ไฟล์อัพโหลด",
+                    message: "ต้องเป็นไฟล์ PDF เท่านั้น"
+                },{ type: 'danger' });
+                $(this).val(''); 
+            }
         });
 
+        // send document
+        $("#send_reserve_form").submit(function(event){
+          // Stop form from submitting normally
+          event.preventDefault();
+
+          var url_link = "action/act_send_rsvform.php";
+          var values   = $(this).serialize();
+
+          $.ajax({
+              url : url_link,
+              type: "POST",
+              data: values,
+              success: function(response){
+                //console.log(response);
+                var obj = JSON.parse(response);
+
+                $.notify({
+                title: "ยื่นคำขอเข้าพักฯ",
+                message: obj.message
+                },{
+                    type: obj.result?'success':'danger'
+                });
+
+                if(obj.result){
+                    // redirect to user_profile
+                    window.setTimeout(function() {
+                        window.location.replace("index.php");
+                    },1500);
+                }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                  console.log(textStatus, errorThrown);
+              }
+          });
+
+        });
 
     });
 </script>

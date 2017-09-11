@@ -17,9 +17,9 @@
           <li class="nav-item <?php selectedTopMenu(TOPMENU_INDEX_HOME,PAGE_MENU_INDEX);?>">
             <a class="nav-link" href="index.php"><i class="fa fa-home" aria-hidden="true"></i> หน้าแรก</a>
           </li>
-          <li class="nav-item <?php selectedTopMenu(TOPMENU_INDEX_HELP,PAGE_MENU_INDEX);?>">
+          <!--<li class="nav-item <?php selectedTopMenu(TOPMENU_INDEX_HELP,PAGE_MENU_INDEX);?>">
             <a class="nav-link" href="#"><i class="fa fa-book" aria-hidden="true"></i> วิธีใช้งาน</a>
-          </li>
+          </li>-->
           <li class="nav-item <?php selectedTopMenu(TOPMENU_INDEX_RESERVATION,PAGE_MENU_INDEX);?>">
             <a class="nav-link" href="#"><i class="fa fa-bars" aria-hidden="true"></i> ลำดับผู้รอจัดสรรเข้าพักอาศัย</a>
           </li>
@@ -77,7 +77,7 @@
               <div class="dropdown-menu" aria-labelledby="dropdown01">
                 <a class="dropdown-item" href="profile.php"><i class="fa fa-address-card-o" aria-hidden="true"></i> บัญชีผู้ใช้</a>
                 <a class="dropdown-item" href="#"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</a>
-                <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a>
+                <a class="dropdown-item" href="log_out.php"><i class="fa fa-sign-out" aria-hidden="true"></i> ออกจากระบบ</a>
               </div>
             </li>
           </ul>

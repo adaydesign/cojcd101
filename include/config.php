@@ -4,8 +4,8 @@ include_once "db_connection.config.php";
 
 //-------------------- System Version ------------------------------
 define("SYS_NAME","ระบบบริหารจัดการห้องพักศาลยุติธรรม");
-define("SYS_NAME_2","COJ CONDO");
-define("SYS_VERSION","0.5.5");
+define("SYS_NAME_2","CCMS");
+define("SYS_VERSION","0.6.2");
 
 //-------------------- PAGE TOP MENU CONSTANT ------------------------------------
 define("TOPMENU_INDEX_HOME",0);

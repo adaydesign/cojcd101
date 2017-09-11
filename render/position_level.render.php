@@ -1,6 +1,6 @@
 <?php
     $pos_id = filter_input(INPUT_POST,"position_id",FILTER_SANITIZE_SPECIAL_CHARS);
-    $lv_id = filter_input(INPUT_POST,"level_id",FILTER_SANITIZE_SPECIAL_CHARS);
+    $lv_id  = filter_input(INPUT_POST,"level_id",FILTER_SANITIZE_SPECIAL_CHARS);
     
     if(!empty($pos_id)){
         include_once "../include/config.php";

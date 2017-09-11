@@ -1,35 +1,42 @@
 <?php
-$output_dir = "uploads/";
-if(isset($_FILES["myfile"]))
-{
-	$ret = array();
+	if(!isset($_SESSION)) { 
+        session_start(); 
+	} 
 	
-//	This is for custom errors;	
-/*	$custom_error= array();
-	$custom_error['jquery-upload-file-error']="File already exists";
-	echo json_encode($custom_error);
-	die();
-*/
-	$error =$_FILES["myfile"]["error"];
-	//You need to handle  both cases
-	//If Any browser does not support serializing of multiple files using FormData() 
-	if(!is_array($_FILES["myfile"]["name"])) //single file
-	{
- 	 	$fileName = $_FILES["myfile"]["name"];
- 		move_uploaded_file($_FILES["myfile"]["tmp_name"],$output_dir.$fileName);
-    	$ret[]= $fileName;
+	$result     = array("form"		=> "upload_pdf_rsv_file",
+						"result"	=> false,
+						"message"	=> "พบข้อผิดพลาด",
+						"role"		=> 0,
+						"file_path"	=> "");
+
+    if(isset($_SESSION['user_id'])){
+		$user_id = $_SESSION['user_id'];
+		$role 	 = filter_input(INPUT_GET,"role",FILTER_SANITIZE_SPECIAL_CHARS);
+		$dest 	 = filter_input(INPUT_GET,"dest",FILTER_SANITIZE_SPECIAL_CHARS).$user_id;
+		if(!empty($role) && isset($_FILES)){
+			//print_r($_FILES);
+			if(!file_exists($dest) || !is_dir($dest)){
+				if (!mkdir($dest, 0777, true)) {
+					die('อัพโหลดไฟล์เอกสาร / Failed to create folders...');
+				}
+			}
+			$date = new DateTime();
+			$dest_file  = "rsvform_".md5($role."_".$user_id."_".$date->getTimestamp()).".pdf";
+			$dest 	   .= "/".$dest_file;
+			if(move_uploaded_file($_FILES["pdf_file"]["tmp_name"],$dest)){
+				$result["result"] 	= true;
+				$result["message"] 	= "อัพโหลดไฟล์ สำเร็จ";
+				$result["role"] 	= $role;
+				$result["file_path"]= substr($dest,3);
+			}else{
+				$result["result"] 	= false;
+				$result["message"] 	= "อัพโหลดไฟล์ ไม่สำเร็จ";
+				$result["role"] 	= $role;
+			}
+			
+		}
 	}
-	else  //Multiple files, file[]
-	{
-	  $fileCount = count($_FILES["myfile"]["name"]);
-	  for($i=0; $i < $fileCount; $i++)
-	  {
-	  	$fileName = $_FILES["myfile"]["name"][$i];
-		move_uploaded_file($_FILES["myfile"]["tmp_name"][$i],$output_dir.$fileName);
-	  	$ret[]= $fileName;
-	  }
 	
-	}
-    echo json_encode($ret);
- }
- ?>
+	echo json_encode($result);
+
+?>

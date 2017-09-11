@@ -46,7 +46,7 @@
               <h3 class="masthead-brand">COJ CONDO</h3>
               <nav class="nav nav-masthead">
                 <a class="nav-link active" href="#">หน้าแรก</a>
-                <a class="nav-link" href="#">วิธีการใช้งาน</a>
+                <!--<a class="nav-link" href="#">วิธีการใช้งาน</a>-->
                 <a class="nav-link" href="#">ลำดับผู้รอจัดสรรเข้าพักอาศัย</a>
               </nav>
             </div>

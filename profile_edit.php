@@ -47,13 +47,14 @@
                             $u_f_name       = $rs0["first_name"];
                             $u_l_name       = $rs0["last_name"];
                             $u_id_card      = $rs0["id_card"];
-                            $u_pos_id       = $rs0["position_id"];
-                            $u_lv_id        = $rs0["level_id"];
+                            $u_pos_id       = empty($rs0["position_id"])?"":$rs0["position_id"];
+                            $u_lv_id        = empty($rs0["level_id"])?"":$rs0["level_id"];
                             $u_email        = $rs0["email"];
                             $u_tel          = $rs0["tel"];
                             $u_office_id    = $rs0["office_id"];
                         } 
                         $db0->close();
+
                     ?>
                     <div class="tab-pane show active" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <form id="edit_profile_form">
@@ -230,10 +231,11 @@ $(function(){
             }
         });
     });
-
-
-    //
-    var a_value    = {"position_id":<?php echo $u_pos_id;?>,"level_id":<?php echo $u_lv_id;?>};
+    
+    <?php 
+        if(!empty($u_pos_id) && !empty($u_lv_id)){
+    ?>
+    var a_value    = {"position_id":<?php echo $u_pos_id;?>, "level_id":<?php echo $u_lv_id;?>};
     var a_url_link = "render/position_level.render.php";
     $.ajax({
         url : a_url_link,
@@ -247,10 +249,9 @@ $(function(){
         }
     });
 
-    
+    <?php
+    } ?>
 });
-
-
 </script>
 
 

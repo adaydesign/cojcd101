@@ -43,7 +43,28 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
     }
     $db->close();
 
+    // User Request
+    $req_count  = 0;
+    $req_num    = "-";
+    $req_date   = "-";
 
+    $db2 = new Database();
+    if($db2->isConnected()){
+        $sql = "SELECT * FROM tb_reserve_form
+        WHERE user_id=:user_id and form_status=1";
+        $db2->query($sql);
+        $db2->bind(":user_id",$USER_ID);
+        if($db2->execute()){
+            if($db2->rowCount()>0){
+                $req_count = $db2->rowCount();
+
+                $rs2     = $db2->singleResult();
+                $req_num = $rs2["id"];
+                $req_date= $rs2["register_date"]; 
+            }
+        }
+    }
+    $db2->close();
 
 ?>
 <div class="row">
@@ -69,8 +90,18 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
                     <dd class="col-2"><button class="btn btn-sm  btn-info"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</button></dd>
 
                     <dt class="col-12 col-sm-4">คำร้องขอเข้าพักอาศัยฯ</dt>
-                    <dd class="col-5">..</dd>
-                    <dd class="col-2"><a href="send_reserve_form.php" class="btn btn-sm btn-info"><i class="fa fa-share-square-o" aria-hidden="true"></i> ยื่นคำร้องขอเข้าพัก</a></dd>
+                    <dd class="col-5">
+                    <?php
+                        $req_send_btn_style = "";
+                        if($req_count==0){
+                            echo "ยังไม่ได้ยื่นคำร้องขอเข้าพักฯ";
+                        }else{
+                            echo "ยื่นคำร้องขอเข้าพักแล้ว";
+                            $req_send_btn_style = "display:none";
+                        }
+                    ?>
+                    </dd>
+                    <dd class="col-2" style="<?php echo $req_send_btn_style;?>"><a href="send_reserve_form.php" class="btn btn-sm btn-info"><i class="fa fa-share-square-o" aria-hidden="true"></i> ยื่นคำร้องขอเข้าพัก</a></dd>
 
                 </dl>
             </div>
@@ -88,17 +119,44 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
             <div class="card-body">
                 <dl class="row mb-0">
                     <dt class="col-4">เลขที่ใบคำร้อง</dt>
-                    <dd class="col-8">..</dd>
+                    <dd class="col-8"><?php echo $req_num;?></dd>
                     
                     <dt class="col-4">วันที่ยื่นคำร้อง</dt>
-                    <dd class="col-8">..</dd>
+                    <dd class="col-8"><?php echo $req_date;?></dd>
 
                     <dt class="col-4">อาคารชุดพักอาศัยที่เลือก</dt>
-                    <dd class="col-8">..</dd>
-
-                    <dt class="col-12 col-sm-4">สถานะการยื่นคำร้อง</dt>
-                    <dd class="col-5">..</dd>
-                    <dd class="col-2"><button class="btn btn-sm btn-info"><i class="fa fa-check-square-o" aria-hidden="true"></i> ยืนยัน/ยกเลิกคำร้อง</button></dd>
+                    <dd class="col-8"><?php
+                        if($req_count==0){
+                            echo "-";
+                        }else{
+                            $db = new Database();
+                            if($db->isConnected()){
+                                $sql = "SELECT tb_building.building_name 
+                                FROM tb_building_select
+                                INNER JOIN tb_building ON tb_building.id=tb_building_select.building_id
+                                WHERE tb_building_select.reserve_form_id=:reserve_form_id";
+                            
+                                $db->query($sql);
+                                $db->bind(":reserve_form_id",$req_num);
+                                if($db->execute()){
+                                    $result = $db->resultSet();
+                                    foreach($result AS $row){
+                                        echo "<text><i class='fa fa-home' aria-hidden='true'></i> ".$row["building_name"]."</text><br>";
+                                    }
+                                }
+                            }
+                            $db->close();
+                        }
+                    
+                    ?></dd>
+                    <?php
+                        $display_confirm = $req_count==0?"display:none":"";
+                    ?>
+                    <dt class="col-12 col-sm-4" style="<?php echo $display_confirm;?>">สถานะการยื่นคำร้อง</dt>
+                    <dd class="col-5" style="<?php echo $display_confirm;?>">
+                        <button class="btn btn-sm btn-info"><i class="fa fa-check-square-o" aria-hidden="true"></i> ยืนยันคำร้องฯ</button>
+                        <button class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> ยกเลิกคำร้องฯ</button>
+                    </dd>
                 </dl>
             </div>
         </div>
@@ -114,12 +172,6 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
             </div>
             <div class="card-body">
                 <dl class="row mb-0">
-                    <dt class="col-4">เลขที่ใบคำร้อง</dt>
-                    <dd class="col-8">..</dd>
-                    
-                    <dt class="col-4">วันที่ยื่นคำร้อง</dt>
-                    <dd class="col-8">..</dd>
-
                     <dt class="col-4">อาคารชุดพักอาศัย</dt>
                     <dd class="col-8">..</dd>
 
