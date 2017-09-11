@@ -51,14 +51,43 @@
             <li class="nav-item dropdown <?php selectedTopMenu(TOPMENU_INDEX_ADMIN,PAGE_MENU_INDEX);?>">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-archive" aria-hidden="true"></i> เมนูสำหรับผู้ดูแลระบบ</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> รายการใบจองห้องพัก</a>
+                <?php
+                if(in_array($USER_STATE,[10,11])){
+                ?>
+                <a class="dropdown-item" href="admin_list_req_rsvfrm.php"><i class="fa fa-circle-o" aria-hidden="true"></i> รายการคำร้องขอเข้าพักฯ</a>
                 <div class="dropdown-divider"></div>
+                <?php
+                  }?>
+
+                <?php
+                if(in_array($USER_STATE,[10,11,12,13])){
+                ?>
                 <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> จัดการข้อมูลห้องพัก</a>
+                <?php
+                }?>
+                
+                <?php
+                if(in_array($USER_STATE,[10,11,12])){
+                ?>
                 <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> บิลรายเดือน</a>
+                <?php
+                }?>
+
+                <?php
+                if(in_array($USER_STATE,[10,11,13])){
+                ?>
                 <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> แจ้งชำรุด</a>
+                <?php
+                }?>
+
+                <?php
+                if(in_array($USER_STATE,[10])){
+                ?>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> ชื่อบัญชีผู้ใช้</a>
                 <a class="dropdown-item" href="#"><i class="fa fa-circle-o" aria-hidden="true"></i> ชื่อบัญชีกลุ่มผู้ดูแลระบบ</a>
+                <?php
+                }?>
               </div>
             </li>
           <?php
