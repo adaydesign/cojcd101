@@ -33,6 +33,23 @@
    $doc_4_path              = empty($doc_4_path)?"":$doc_4_path;
    $doc_5_path              = empty($doc_5_path)?"":$doc_5_path;
 
+    //check -1
+    // $user_marriage_status $house_owner_status $house_owner_is_label
+    if($user_marriage_status==-1){
+        $result["message"] = "กรุณาเลือก สถานะภาพ";
+        echo json_encode($result);
+        exit();
+    }else if($house_owner_status==-1){
+        $result["message"] = "กรุณาเลือก เลือกเจ้าของบ้าน";
+        echo json_encode($result);
+        exit();
+    }else if($house_owner_is_label==-1){
+        $result["message"] = "กรุณาเลือก ที่กล่อง 'โดยเป็น'";
+        echo json_encode($result);
+        exit();
+    }
+
+
    if($house_owner_is_label==-2){
     $house_owner_is_label = $other_house_owner_is_label;
    }

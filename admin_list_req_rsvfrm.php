@@ -44,10 +44,12 @@
                     $db = new Database();
                     if($db->isConnected()){
                         $sql = "SELECT tb_reserve_form.id AS reserve_form_id,
+                        tb_reserve_form.form_status AS form_status,
                         tb_users.id AS user_id, 
                         tb_users.first_name,
                         tb_users.last_name,
-                        tb_users.level_id,tb_users.position_id,
+                        tb_users.level_id,
+                        tb_users.position_id,
                         tb_users.office_id,
                         tb_reserve_form.register_date,
                         tb_position.position_name,
@@ -58,6 +60,7 @@
                         INNER JOIN tb_position ON tb_position.id=tb_users.position_id
                         INNER JOIN tb_level ON tb_level.id=tb_users.level_id
                         INNER JOIN tb_bkk_courts ON tb_bkk_courts.id=tb_users.office_id
+                        WHERE tb_reserve_form.form_status=1 OR tb_reserve_form.form_status=7 
                         ORDER BY tb_reserve_form.register_date";
 
                         $db->query($sql);
@@ -87,18 +90,21 @@
                                             $r_user_id            = $row["user_id"];
                                             $r_first_name         = $row["first_name"];
                                             $r_last_name          = $row["last_name"];
-                                            $r_register_date      = $row["register_date"];
+                                            $r_register_date      = getDateThai($row["register_date"]);
                                             $r_position_name      = $row["position_name"];
                                             $r_level_name         = $row["level_name"];
                                             $r_office_name        = $row["office_name"];
+                                            $r_form_status        = $row["form_status"];
 
-                                            echo "<tr>",
+                                            $h_edit = $r_form_status==7?"table-danger":"";
+
+                                            echo "<tr class='$h_edit'>",
                                                  "<td class='text-center'>".(++$order)."</td>",
                                                  "<td>$r_first_name $r_last_name</td>",
                                                  "<td>$r_position_name</td>",
                                                  "<td>$r_level_name</td>",
-                                                 "<td>$r_office_name</td>",
-                                                 "<td>$r_register_date</td>",
+                                                 "<td><small>$r_office_name</small></td>",
+                                                 "<td><small>$r_register_date</small></td>",
                                                  "<td>
                                                  <form action='admin_approve_rsvfrm.php' method='post'>
                                                     <input type='hidden' name='rsvform_id' value='$r_reserve_form_id'>

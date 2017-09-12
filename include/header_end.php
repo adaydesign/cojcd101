@@ -21,7 +21,7 @@
             <a class="nav-link" href="#"><i class="fa fa-book" aria-hidden="true"></i> วิธีใช้งาน</a>
           </li>-->
           <li class="nav-item <?php selectedTopMenu(TOPMENU_INDEX_RESERVATION,PAGE_MENU_INDEX);?>">
-            <a class="nav-link" href="#"><i class="fa fa-bars" aria-hidden="true"></i> ลำดับผู้รอจัดสรรเข้าพักอาศัย</a>
+            <a class="nav-link" href="list_requesters.php"><i class="fa fa-bars" aria-hidden="true"></i> ลำดับผู้รอจัดสรรเข้าพักอาศัย</a>
           </li>
           
           <?php
@@ -33,7 +33,7 @@
                 <?php 
                 if($USER_STATE===0){ ?>
                   <a class="dropdown-item" href="send_reserve_form.php"><i class="fa fa-check-circle-o" aria-hidden="true"></i> ยื่นคำร้องขอเข้าพัก</a>
-                  <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> สถานะการยื่นคำร้อง</a>
+                  <!-- <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> สถานะการยื่นคำร้อง</a> -->
                 <?php 
                 }else if($USER_STATE===1){ ?>
                   <a class="dropdown-item" href="#"><i class="fa fa-check-circle-o" aria-hidden="true"></i> ตรวจสอบบิลรายเดือน</a>
@@ -114,6 +114,7 @@
         }else{
         ?>
           <!-- NORMAL -->
+          <!--
           <ul class="navbar-nav" style="min-width: 150px;">
             <li class="nav-item dropdown  <?php selectedTopMenu(TOPMENU_INDEX_USER_LOGIN,PAGE_MENU_INDEX);?>" style="width: 100%">
               <a class="nav-link dropdown-toggle text-right" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o" aria-hidden="true"></i> เข้าสู่ระบบ</a>
@@ -123,6 +124,7 @@
               </div>
             </li>
           </ul>
+          -->
         <?php
         }?>
         

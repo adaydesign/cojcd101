@@ -56,6 +56,9 @@
         tb_reserve_form.path_copy_marriage_license ,
         tb_reserve_form.path_copy_changed_name ,
         tb_reserve_form.path_copy_current_census ,
+        tb_reserve_form.form_status,
+        tb_reserve_form.approver_note,
+        tb_reserve_form.approve_date,
         tb_users.id AS user_id, 
         tb_users.first_name,
         tb_users.last_name,
@@ -82,6 +85,9 @@
                 $rs = $db->singleResult();
                 
                 $reserve_form_id        = $rs["reserve_form_id"];
+                $reserve_form_status    = $rs["form_status"];
+                $reserve_form_approver_note = $rs["approver_note"];
+                $reserve_form_approve_date  = $rs["approve_date"];
                 $register_date          = $rs["register_date"];
                 $marry_status           = $rs["marry_status"];
                 $spouse_first_name      = $rs["spouse_first_name"];
@@ -140,7 +146,7 @@
                     <dd class="col-md-8"><?php echo $r_user_position_name.$r_user_level_name;?></dd>
 
                     <dt class="col-md-4">วันที่ยื่นคำร้อง</dt>
-                    <dd class="col-md-8"><?php echo $register_date;?></dd>
+                    <dd class="col-md-8"><?php echo getDateThai($register_date);?></dd>
                 </dl>
             </div>
         </div>
@@ -174,9 +180,23 @@
 
                         <dt class="col-md-4">จำนวนบุตร</dt>
                         <dd class="col-md-8"><?php echo $num_child > 0? $num_child." คน":"";?>
+
                         </dd>
                     <?php
                     }   ?>
+
+                    <dt class="col-md-4">ที่อยู่ปัจจุบัน</dt>
+                    <dd class="col-md-8"><?php echo $address;?></dd>
+
+                    <dt class="col-md-4">ซึ่งบ้านดังกล่าวเป็นของ</dt>
+                    <dd class="col-md-8"><?php 
+                        $house_status_label = array("ข้าพเจ้า","คู่สมรส","บุตร");
+                        echo $house_status_label[$house_status];
+                    ?>
+                    </dd>
+
+                    <dt class="col-md-4">โดยเป็น</dt>
+                    <dd class="col-md-8"><?php echo $house_owner;?></dd>
 
                 </dl>
             </div>
@@ -250,12 +270,48 @@
 </div>
 <div class="row mt-3">
     <div class="col">
-        <div class="card">
-            <div class="card-header">
-                <i class="fa fa-file-text-o" aria-hidden="true"></i> การอนุมัติ
+        <div class="card border-success">
+            <div class="card-header bg-success text-white">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i> ตรวจสอบเอกสาร (สำหรับผู้ดูแลระบบ)
             </div>
-            <div class="card-body">
-            </div>
+            <form id="form_approve_req_doc">
+                <div class="card-body">
+                    <!-- Check Box ตรวจสอบ -->
+                    <div class="form-group row">
+                        <label for="" class="col-lg-3 col-form-label">ข้อมูลคำร้องขอ</label>
+                        <div class="col-lg-5">
+                            <select class="custom-select form-control" id="approve_data" name="approve_data">
+                                <option value="0">- เลือก -</option>
+                                <option value="1">ครบถ้วนสมบูรณ์</option>
+                                <option value="2">ไม่ครบถ้วน</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="approve_doc" class="col-lg-3 col-form-label">เอกสารประกอบ</label>
+                        <div class="col-lg-5">
+                            <select class="custom-select form-control" id="approve_doc" name="approve_doc">
+                                <option value="0">- เลือก -</option>
+                                <option value="1">ครบถ้วนสมบูรณ์</option>
+                                <option value="2">ไม่ครบถ้วน</option>
+                            </select>
+                        </div>
+                    </div>
+                    <?php
+                        if($reserve_form_status==7){ ?>
+                        <div class="form-group row">
+                            <label class="col-lg-3 col-form-label">หมายเหตุการอนุมัติครั้งก่อน</label>
+                            <label class="col-lg-9 col-form-label text-danger"><?php echo $reserve_form_approver_note." <small>(ตรวจสอบวันที่ ".getDateThai($reserve_form_approve_date,true).")</small>";?></label>
+                        </div>
+                    <?php        
+                        } ?>
+                </div>
+                <div class="card-footer text-center">
+                    <input type="hidden" name="rsv_frm_id" value="<?php echo base64_encode($reserve_form_id);?>">
+                    <input type="hidden" name="approver_id" value="<?php echo base64_encode($USER_ID);?>">
+                    <button type="submit" class="btn btn-success" name="approve_req_btn"><i class="fa fa-floppy-o" aria-hidden="true"></i> บันทึกการตรวจสอบ/อนุมัติ คำร้อง</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -263,4 +319,50 @@
 <!-- Content -->
 
 <?php include_once "include/footer.php"; ?>
+
+<script>
+
+    $(function(){
+
+        // send document
+        $("#form_approve_req_doc").submit(function(event){
+          // Stop form from submitting normally
+          event.preventDefault();
+
+          var url_link = "action/act_approve_rsvfrm.php";
+          var values   = $(this).serialize();
+
+          $.ajax({
+              url : url_link,
+              type: "POST",
+              data: values,
+              success: function(response){
+                console.log(response);
+                var obj = JSON.parse(response);
+
+                
+                $.notify({
+                    title: ">",
+                    message: obj.message
+                },{
+                    type: obj.result?'success':'danger'
+                });
+
+                if(obj.result){
+                    // redirect to user_profile
+                    window.setTimeout(function() {
+                        window.location.replace("admin_list_req_rsvfrm.php");
+                    },1500);
+                }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                  console.log(textStatus, errorThrown);
+              }
+          });
+
+        });
+
+    });
+</script>
+
 <?php include_once "include/footer_end.php"; ?>

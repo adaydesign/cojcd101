@@ -50,17 +50,25 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
 
     $db2 = new Database();
     if($db2->isConnected()){
-        $sql = "SELECT * FROM tb_reserve_form
-        WHERE user_id=:user_id and form_status=1";
+        $sql = "SELECT 
+            tb_reserve_form.id AS form_id,
+            register_date,form_status,approver_note,
+            tb_reserve_form_status.status_name
+        FROM tb_reserve_form
+        INNER JOIN tb_reserve_form_status ON tb_reserve_form_status.id=tb_reserve_form.form_status
+        WHERE user_id=:user_id";
         $db2->query($sql);
         $db2->bind(":user_id",$USER_ID);
         if($db2->execute()){
             if($db2->rowCount()>0){
                 $req_count = $db2->rowCount();
 
-                $rs2     = $db2->singleResult();
-                $req_num = $rs2["id"];
-                $req_date= $rs2["register_date"]; 
+                $rs2                = $db2->singleResult();
+                $req_num            = $rs2["form_id"];
+                $req_date           = getDateThai($rs2["register_date"]);
+                $req_status         = $rs2['form_status'];
+                $req_status_name    = $rs2['status_name'];
+                $req_approver_note  = $rs2['approver_note'];
             }
         }
     }
@@ -85,7 +93,7 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
                     <dd class="col-5"><?php echo $u_completed_info;?></dd>
                     <dd class="col-2"><a href="profile_edit.php" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไขข้อมูลส่วนตัว</a></dd>
 
-                    <dt class="col-12 col-sm-4">การเชื่อมโยง LINE Account</dt>
+                    <dt class="col-12 col-sm-4">การเชื่อมต่อ LINE Account</dt>
                     <dd class="col-5"><?php echo $u_completed_line; ?></dd>
                     <dd class="col-2"><button class="btn btn-sm  btn-info"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</button></dd>
 
@@ -149,14 +157,43 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
                         }
                     
                     ?></dd>
+
                     <?php
-                        $display_confirm = $req_count==0?"display:none":"";
-                    ?>
-                    <dt class="col-12 col-sm-4" style="<?php echo $display_confirm;?>">สถานะการยื่นคำร้อง</dt>
-                    <dd class="col-5" style="<?php echo $display_confirm;?>">
-                        <button class="btn btn-sm btn-info"><i class="fa fa-check-square-o" aria-hidden="true"></i> ยืนยันคำร้องฯ</button>
-                        <button class="btn btn-sm btn-danger"><i class="fa fa-times" aria-hidden="true"></i> ยกเลิกคำร้องฯ</button>
-                    </dd>
+                        if($req_count > 0){ ?>
+                            <dt class="col-12 col-sm-4" >สถานะการยื่นคำร้อง</dt>
+                            <dd class="col-12 col-sm-5" >
+                                <?php
+                                    //$icon       = $req_status==6?"fa-check":"fa-times";
+                                    if($req_status==1){
+                                        $icon       = "fa-hourglass-half";
+                                        $text_color = "text-warning";
+                                    }
+                                    else if($req_status==2 ||$req_status==4 ||$req_status==5 ||$req_status==6){
+                                        $icon       = "fa-check";
+                                        $text_color = "text-success";
+                                    }else{
+                                        $icon       = "fa-times";
+                                        $text_color = "text-danger";
+                                    }
+                                ?>
+                                <text class="text <?php echo $text_color;?>"><i class="fa <?php echo $icon;?>" aria-hidden="true"></i> <?php echo $req_status_name;?></text>
+                                <?php 
+                                    if($req_status==7){ ?>
+                                    <div class="w-100"></div>
+                                    <text class="text text-danger"><small><?php echo "หมายเหตุ ".$req_approver_note;?></small></text>
+                                <?php
+                                    } ?>
+                            </dd>
+                            
+                            <?php
+                                $display_confirm = $req_status!=6?"display:none":""; ?>
+                            <dt class="col-12 col-sm-4 mt-3" style="<?php echo $display_confirm;?>">ยืนยัน/ยกเลิกคำร้อง</dt>
+                            <dd class="col-12 col-sm-5 mt-3" style="<?php echo $display_confirm;?>">
+                                <button class="btn btn-sm btn-info"   id="btn_confirm_req" data-reqdoc="<?php echo base64_encode($req_num); ?>" data-comfirm="true"><i class="fa fa-check-square-o" aria-hidden="true"></i> ยืนยันคำร้องฯ</button>
+                                <button class="btn btn-sm btn-danger" id="btn_cancel_req"  data-reqdoc="<?php echo base64_encode($req_num); ?>" data-comfirm="false"><i class="fa fa-times" aria-hidden="true"></i> ยกเลิกคำร้องฯ</button>
+                            </dd>
+                    <?php
+                        } ?>
                 </dl>
             </div>
         </div>

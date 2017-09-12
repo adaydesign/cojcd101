@@ -38,4 +38,13 @@
 <!-- End Content (end container div) -->
 
 <?php include_once "include/footer.php"; ?>
+
+<?php
+    if($USER_LOGIN){
+        include_once "main_m1_script.php";    
+        //include_once "main_m2_script.php";    
+        //include_once "main_admin_script.php";
+    }
+?>
+
 <?php include_once "include/footer_end.php"; ?>

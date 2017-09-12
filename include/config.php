@@ -5,7 +5,7 @@ include_once "db_connection.config.php";
 //-------------------- System Version ------------------------------
 define("SYS_NAME","ระบบบริหารจัดการห้องพักศาลยุติธรรม");
 define("SYS_NAME_2","CCMS");
-define("SYS_VERSION","0.7.1");
+define("SYS_VERSION","1.0.1");
 
 //-------------------- PAGE TOP MENU CONSTANT ------------------------------------
 define("TOPMENU_INDEX_HOME",0);

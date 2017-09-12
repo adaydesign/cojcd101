@@ -43,11 +43,11 @@
         <div class="cover-container">
           <div class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">COJ CONDO</h3>
+              <h3 class="masthead-brand"><?php echo SYS_NAME_2;?></h3>
               <nav class="nav nav-masthead">
                 <a class="nav-link active" href="#">หน้าแรก</a>
                 <!--<a class="nav-link" href="#">วิธีการใช้งาน</a>-->
-                <a class="nav-link" href="#">ลำดับผู้รอจัดสรรเข้าพักอาศัย</a>
+                <a class="nav-link" href="list_requesters.php">ลำดับผู้รอจัดสรรเข้าพักอาศัย</a>
               </nav>
             </div>
           </div>
