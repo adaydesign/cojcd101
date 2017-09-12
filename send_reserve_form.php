@@ -51,6 +51,7 @@
                         $position_name  = $rs["position_name"];
                         $level_name     = $rs["level_name"];
                         $office_name    = $rs["court_name"];
+                        $level_id       = $rs["level_id"];
                     }
                 }
                 $db->close();
@@ -176,7 +177,12 @@
                     
                     <!-- ------------------------------------------------------- -->
                     <!-- select building -->
-                    <div class="form-group row bg-info">
+                    <?php
+                        // filter building for level
+                        $display_2 = in_array($level_id,[8,6,9])?"":"disabled";
+                        $display_3 = in_array($level_id,[4,5,6,8,9])?"":"disabled";
+                    ?>
+                    <div class="form-group row bg-success">
                         <label class="col col-form-label"><i class="fa fa-home" aria-hidden="true"></i> มีความประสงค์ขอเข้าพักอาศัยในอาคารที่พักข้าราชการศาลยุติธรรมในเขตกรุงเทพมหานคร</label>
                     </div>
                     <div class="form-group row">
@@ -188,15 +194,23 @@
                             </label>
                             <div class="w-100"></div>
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="select_building_2" value="1">
+                                <input class="form-check-input" type="checkbox" name="select_building_2" value="1" <?php echo $display_2;?>>
                                 อาคารที่พักข้าราชการศาลยุติธรรม ขนาด 50 หน่วย (ตลิ่งชัน)
                             </label>
                             <div class="w-100"></div>
                             <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="select_building_3" value="1">
+                                <input class="form-check-input" type="checkbox" name="select_building_3" value="1" <?php echo $display_3;?>>
                                 อาคารชุดที่พักอาศัยข้าราชการศาลยุติธรรม จำนวน 96 หน่วย (ตลิ่งชัน)
                             </label>
                         </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row bg-light">
+                        <text class="text text-info pl-3"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <small>หมายเหตุ</small></text>
+                        <div class="w-100"></div>
+                        <text class="text text-info pl-3">อาคารที่พักข้าราชการศาลยุติธรรม ซอยเสนานิคม 1 <small class='text-danger'>สำหรับ ระดับปฏิบัติงานขึ้นไป</small></text><br>
+                        <text class="text text-info pl-3">อาคารที่พักข้าราชการศาลยุติธรรม ขนาด 50 หน่วย (ตลิ่งชัน) <small class='text-danger'>สำหรับ ระดับปฏิบัติงาน ชำนาญงาน ปฏิบัติการ</small></text><br>
+                        <text class="text text-info pl-3">อาคารชุดที่พักอาศัยข้าราชการศาลยุติธรรม จำนวน 96 หน่วย (ตลิ่งชัน) <small class='text-danger'>สำหรับ ระดับปฏิบัติงาน ชำนาญงาน ปฏิบัติการ ชำนาญการ ชำนาญการพิเศษ</small></text>
                     </div>
                     
                     <!-- ------------------------------------------------------- -->

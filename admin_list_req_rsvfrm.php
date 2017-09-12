@@ -65,11 +65,11 @@
                         ?>
                             <p class="text-center">จำนวนรายการคำร้องขอเข้าพักอาศัยฯ ทั้งหมด <?php echo $db->rowCount();?> รายการ</p>
 
-                            <table class="table table-striped">
+                            <table class="table table-sm table-striped table-responsive">
                                 <thead>
                                     <tr>
                                         <th class='text-center'>ลำดับ</th>
-                                        <th class='text-center'>ชื่อ-นามสกุล ผู้ยื่นคำร้อง</th>
+                                        <th class='text-center'>ชื่อ-นามสกุล</th>
                                         <th class='text-center'>ตำแหน่ง</th>
                                         <th class='text-center'>ระดับ</th>
                                         <th class='text-center'>สังกัด</th>
@@ -114,8 +114,6 @@
                                     ?>
                                 </tbody>
                             </table>
-
-
                         <?php
                         }
                     }
