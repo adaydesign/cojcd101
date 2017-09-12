@@ -41,14 +41,14 @@
 
             if($db->execute()){
 
-                echo "<table class='table table-striped table-sm'>",
+                echo "<table class='table table-striped table-sm table-responsive table-bordered'>",
                 "<thead>",
                     "<tr>",
-                        "<th>ลำดับ</th>",
-                        "<th>ชื่อ-นามสกุล</th>",
-                        "<th>ตำแหน่ง</th>",
-                        "<th>สังกัด</th>",
-                        "<th>วันเวลา ที่ยื่นคำร้อง</th>",
+                        "<th class='text-center'>ลำดับ</th>",
+                        "<th class='text-center'>ชื่อ-นามสกุล</th>",
+                        "<th class='text-center'>ตำแหน่ง</th>",
+                        "<th class='text-center'>สังกัด</th>",
+                        "<th class='text-center'>วันเวลา ที่ยื่นคำร้อง</th>",
                     "</tr>",
                 "</thead>",
                 "<tbody>";
@@ -66,7 +66,7 @@
                         "<td class='text-center'>".($order++)."</td>",
                         "<td>$user_full_name</td>",
                         "<td>$position_name</td>",
-                        "<td>$office_name </td>",
+                        "<td class='text-center'>$office_name </td>",
                         "<td>$register_date</td>",
                         "</tr>";
                     }
