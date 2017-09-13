@@ -21,6 +21,8 @@ use \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder;
 use \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
 use \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
 use \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
+use \LINE\LINEBot\TemplateActionBuilder\MessageTemplateActionBuilder;
+use \LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
 
 
 $httpClient = new CurlHTTPClient(LINEBOT_ACCESS_TOKEN);
@@ -69,7 +71,7 @@ foreach ($events as $event) {
         //cmd : search
       }else if(strcmp($cmd_head,CMD_LIST)===0){
         //cmd : list
-
+        /*
         $columns = array();
         $img_url = "https://cojcd101.herokuapp.com/assets/images/bg12.png";
         
@@ -82,7 +84,16 @@ foreach ($events as $event) {
         $carousel = new CarouselTemplateBuilder($columns);
         $outputText = new TemplateMessageBuilder("Carousel Demo", $carousel);
 
-        $bot->replyMessage($event->getReplyToken(), $outputText);
+        $bot->replyMessage($event->getReplyToken(), $outputText);*/
+
+        $actions = array (
+            New UriTemplateActionBuilder("รายชื่อผู้รอจัดสรรเข้าพักฯ", "https://cojcd101.herokuapp.com/list_requesters.php")
+        );
+        $img_url = "https://cojcd101.herokuapp.com/assets/images/bg12.png";
+        $button = new ButtonTemplateBuilder("button text", "description", $img_url, $actions);
+        $outputText = new TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+
+
       }else if(strcmp($cmd_head,CMD_REGISTER)===0){
         //cmd : register
         $outputText = new TextMessageBuilder("Welcome ...");
