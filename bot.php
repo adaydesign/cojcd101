@@ -12,7 +12,7 @@ use \LINE\LINEBot\HTTPClient;
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot\MessageBuilder;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
-use \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
+use \LINE\LINEBot\Event\MessageEvent\TextMessage;
 
 $httpClient = new CurlHTTPClient(LINEBOT_ACCESS_TOKEN);
 $bot = new LINEBot($httpClient, ['channelSecret' => LINEBOT_CHANNEL_SECRET]);
@@ -29,5 +29,19 @@ try {
   error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
 }
 
+
+//-------------- //
+foreach ($events as $event) {
+    
+    // Message Event = TextMessage
+    if (($event instanceof TextMessage)) {
+      // get message text
+      $messageText=strtolower(trim($event->getText()));
+      
+
+      $outputText = new TextMessageBuilder(">> $messageText".);
+      $bot->replyMessage($event->getReplyToken(), $outputText);
+    }
+  }  
 
 ?>
