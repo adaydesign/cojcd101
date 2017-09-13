@@ -42,7 +42,7 @@ foreach ($events as $event) {
 
       // check cmd
       if($cmd){
-        $cmd_params = explode($messageText," ");
+        $cmd_params = explode(" ",$messageText);
         $cmd_p_size = count($cmd_params);
         $cmd_head   = "";
         $cmd_value  = "";
