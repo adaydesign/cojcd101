@@ -3,6 +3,10 @@
 define("LINEBOT_ACCESS_TOKEN","4CaPW0nMt7/g/JJlwLv5Na3FrXaKlXT8vafjvcTbKLrBoRGTYb+nCLZvn8uHvDNlw+UbXaBBwGC0Sm5smUw34B6S0ezNNM/ztd5knT+tQOeLRv4k4Oz/ZiE1j1jslrhCjpidRnjoW1TfIG1gb2MymQdB04t89/1O/w1cDnyilFU=");
 define("LINEBOT_CHANNEL_SECRET","9e65a3cdf681cfff0abaaa0cdb0edd1f");
 
+define("CMD_SEARCH","#search");
+define("CMD_LIST","#list");
+define("CMD_REGISTER","#register");
+
 
 include ('vendor/autoload.php');
 
@@ -12,6 +16,12 @@ use \LINE\LINEBot\HTTPClient;
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot\MessageBuilder;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use \LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
+use \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselColumnTemplateBuilder;
+use \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
+use \LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
+use \LINE\LINEBot\TemplateActionBuilder\UriTemplateActionBuilder;
+
 
 $httpClient = new CurlHTTPClient(LINEBOT_ACCESS_TOKEN);
 $bot = new LINEBot($httpClient, ['channelSecret' => LINEBOT_CHANNEL_SECRET]);
@@ -39,7 +49,6 @@ foreach ($events as $event) {
       
       $cmd = strpos($messageText, "#")===0;
 
-
       // check cmd
       if($cmd){
         $cmd_params = explode(" ",$messageText);
@@ -55,10 +64,36 @@ foreach ($events as $event) {
         }
       }
 
+      // compare cmd
+      if(strcmp($cmd_head,CMD_SEARCH)===0){
+        //cmd : search
+      }else if(strcmp($cmd_head,CMD_LIST)===0){
+        //cmd : list
 
-      // reply message
-      $outputText = new TextMessageBuilder(">> $messageText: '$cmd_head'-'$cmd_value' ");
-      $bot->replyMessage($event->getReplyToken(), $outputText);
+        $columns = array();
+        $img_url = "https://cojcd101.herokuapp.com/assets/images/bg101.jpg";
+        for($i=0;$i<1;$i++) {
+          $actions = array(
+            new UriTemplateActionBuilder("View","https://cojcd101.herokuapp.com/list_requesters.php")
+          );
+          $column = new CarouselColumnTemplateBuilder("รายชื่อผู้รอจัดสรรเข้าพักฯ", "", $img_url , $actions);
+          $columns[] = $column;
+        }
+        $carousel = new CarouselTemplateBuilder($columns);
+        $outputText = new TemplateMessageBuilder("Carousel Demo", $carousel);
+
+        $bot->replyMessage($event->getReplyToken(), $outputText);
+      }else if(strcmp($cmd_head,CMD_REGISTER)===0){
+        //cmd : register
+        $outputText = new TextMessageBuilder("Welcome ...");
+        $bot->replyMessage($event->getReplyToken(), $outputText);
+      }else{
+        //else
+        $outputText = new TextMessageBuilder("คำสั่ง #list, #search <ชื่อ>");
+        $bot->replyMessage($event->getReplyToken(), $outputText);
+      }
+
+      
     }
   }  
 
