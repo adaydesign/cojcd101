@@ -93,14 +93,14 @@ foreach ($events as $event) {
         $button = new ButtonTemplateBuilder("button text", "description", $img_url, $actions);
         $outputText = new TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
 
-
+        $bot->replyMessage($event->getReplyToken(), $outputText);
       }else if(strcmp($cmd_head,CMD_REGISTER)===0){
         //cmd : register
         $outputText = new TextMessageBuilder("Welcome ...");
         $bot->replyMessage($event->getReplyToken(), $outputText);
       }else{
         //else
-        $outputText = new TextMessageBuilder("คำสั่ง #list, #search <ชื่อ>");
+        $outputText = new TextMessageBuilder("CCMS คำสั่ง #list, #search <ชื่อ>");
         $bot->replyMessage($event->getReplyToken(), $outputText);
       }
 
