@@ -71,14 +71,14 @@ foreach ($events as $event) {
         //cmd : list
 
         $columns = array();
-        $img_url = "https://cojcd101.herokuapp.com/assets/images/bg101.jpg";
-        for($i=0;$i<1;$i++) {
-          $actions = array(
+        $img_url = "https://cojcd101.herokuapp.com/assets/images/bg12.png";
+        
+        $actions = array(
             new UriTemplateActionBuilder("View","https://cojcd101.herokuapp.com/list_requesters.php")
-          );
-          $column = new CarouselColumnTemplateBuilder("รายชื่อผู้รอจัดสรรเข้าพักฯ", "", $img_url , $actions);
-          $columns[] = $column;
-        }
+        );
+        $column = new CarouselColumnTemplateBuilder("รายชื่อผู้รอจัดสรรเข้าพักฯ", "", $img_url , $actions);
+        $columns[] = $column;
+        
         $carousel = new CarouselTemplateBuilder($columns);
         $outputText = new TemplateMessageBuilder("Carousel Demo", $carousel);
 
