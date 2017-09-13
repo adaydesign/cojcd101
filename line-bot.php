@@ -7,6 +7,7 @@ use \LINE\LINEBot\HTTPClient;
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot\MessageBuilder;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
 
 class BOT_API extends LINEBot {
 	

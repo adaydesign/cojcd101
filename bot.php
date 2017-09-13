@@ -1,30 +1,33 @@
 <?php
 
-include_once "vendor/autoload.php";
+define("LINEBOT_ACCESS_TOKEN","4CaPW0nMt7/g/JJlwLv5Na3FrXaKlXT8vafjvcTbKLrBoRGTYb+nCLZvn8uHvDNlw+UbXaBBwGC0Sm5smUw34B6S0ezNNM/ztd5knT+tQOeLRv4k4Oz/ZiE1j1jslrhCjpidRnjoW1TfIG1gb2MymQdB04t89/1O/w1cDnyilFU=");
+define("LINEBOT_CHANNEL_SECRET","9e65a3cdf681cfff0abaaa0cdb0edd1f");
 
-$accessToken   = "4CaPW0nMt7/g/JJlwLv5Na3FrXaKlXT8vafjvcTbKLrBoRGTYb+nCLZvn8uHvDNlw+UbXaBBwGC0Sm5smUw34B6S0ezNNM/ztd5knT+tQOeLRv4k4Oz/ZiE1j1jslrhCjpidRnjoW1TfIG1gb2MymQdB04t89/1O/w1cDnyilFU=";
-$channelSecret = "9e65a3cdf681cfff0abaaa0cdb0edd1f";
 
-include_once "line-bot.php";
+include ('vendor/autoload.php');
 
-$bot = new BOT_API($channelSecret, $accessToken);
-	
-if (!empty($bot->isEvents)) {
-		
-    $bot->replyMessageNew($bot->replyToken, json_encode($bot->message));
-    if ($bot->isSuccess()) {
-        echo 'Succeeded!';
-        //exit();
-    }
-    $bot->sendMessageNew('U2da8b19feaedf50a33baaeb80ce64ba2', 'Hello World !!');
-    if ($bot->isSuccess()) {
-        echo 'Succeeded!';
-        exit();
-    }
+use \LINE\LINEBot;
+use \LINE\LINEBot\Constant\HTTPHeader;
+use \LINE\LINEBot\HTTPClient;
+use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
+use \LINE\LINEBot\MessageBuilder;
+use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
+use \LINE\LINEBot\MessageBuilder\TemplateBuilder\CarouselTemplateBuilder;
 
-    // Failed
-    echo $bot->response->getHTTPStatus . ' ' . $bot->response->getRawBody(); 
-    exit();
+$httpClient = new CurlHTTPClient(LINEBOT_ACCESS_TOKEN);
+$bot = new LINEBot($httpClient, ['channelSecret' => LINEBOT_CHANNEL_SECRET]);
+$signature = $_SERVER['HTTP_' . HTTPHeader::LINE_SIGNATURE];
+try {
+  $events = $bot->parseEventRequest(file_get_contents('php://input'), $signature);
+} catch(\LINE\LINEBot\Exception\InvalidSignatureException $e) {
+  error_log('parseEventRequest failed. InvalidSignatureException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\UnknownEventTypeException $e) {
+  error_log('parseEventRequest failed. UnknownEventTypeException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\UnknownMessageTypeException $e) {
+  error_log('parseEventRequest failed. UnknownMessageTypeException => '.var_export($e, true));
+} catch(\LINE\LINEBot\Exception\InvalidEventRequestException $e) {
+  error_log('parseEventRequest failed. InvalidEventRequestException => '.var_export($e, true));
 }
+
 
 ?>
