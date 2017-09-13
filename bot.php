@@ -35,10 +35,29 @@ foreach ($events as $event) {
     // Message Event = TextMessage
     if (($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
       // get message text
-      $messageText=strtolower(trim($event->getText()));
+      $messageText = strtolower(trim($event->getText()));
       
+      $cmd = strpos($messageText, "#")===0;
+
+
+      // check cmd
+      if($cmd){
+        $cmd_params = explode($messageText," ");
+        $cmd_p_size = count($cmd_params);
+        $cmd_head   = "";
+        $cmd_value  = "";
+
+        if($cmd_p_size==1){
+            $cmd_head  = $cmd_params[0];
+        }else if($cmd_p_size>=2){
+            $cmd_head   = $cmd_params[0];;
+            $cmd_value  = $cmd_params[1];;
+        }
+      }
+
+
       // reply message
-      $outputText = new TextMessageBuilder(">> $messageText");
+      $outputText = new TextMessageBuilder(">> $messageText: '$cmd_head'-'$cmd_value' ");
       $bot->replyMessage($event->getReplyToken(), $outputText);
     }
   }  
