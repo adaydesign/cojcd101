@@ -69,9 +69,10 @@ foreach ($events as $event) {
       // compare cmd
       if(strcmp($cmd_head,CMD_SEARCH)===0){
         //cmd : search
+        $outputText = new TextMessageBuilder("คำสั่ง #search อยู่ในระหว่างการปรับปรุง ท่านสามารถใช้คำสั่ง #list เพื่อดูรายชื่อผู้รอจัดสรรเข้าพักฯ");
+        $bot->replyMessage($event->getReplyToken(), $outputText);
       }else if(strcmp($cmd_head,CMD_LIST)===0){
         //cmd : list
-
         $actions = array (
             New UriTemplateActionBuilder("รายชื่อผู้รอจัดสรรเข้าพักฯ", "https://cojcd101.herokuapp.com/list_requesters.php")
         );
@@ -84,9 +85,10 @@ foreach ($events as $event) {
         //cmd : register
         $outputText = new TextMessageBuilder("Welcome ...");
         $bot->replyMessage($event->getReplyToken(), $outputText);
+
       }else{
         //else
-        $outputText = new TextMessageBuilder("CCMS คำสั่ง #list, #search <ชื่อ>");
+        $outputText = new TextMessageBuilder("CCMS ยินดีต้อนรับ ท่านสามารถใช้คำสั่ง #list เพื่อดูรายชื่อผู้รอจัดสรรเข้าพักฯ");
         $bot->replyMessage($event->getReplyToken(), $outputText);
       }
 

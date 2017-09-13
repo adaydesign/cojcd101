@@ -93,10 +93,6 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
                     <dd class="col-5"><?php echo $u_completed_info;?></dd>
                     <dd class="col-2"><a href="profile_edit.php" class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไขข้อมูลส่วนตัว</a></dd>
 
-                    <dt class="col-12 col-sm-4">การเชื่อมต่อ LINE Account</dt>
-                    <dd class="col-5"><?php echo $u_completed_line; ?></dd>
-                    <dd class="col-2"><button class="btn btn-sm  btn-info"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</button></dd>
-
                     <dt class="col-12 col-sm-4">คำร้องขอเข้าพักอาศัยฯ</dt>
                     <dd class="col-5">
                     <?php
@@ -110,6 +106,15 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
                     ?>
                     </dd>
                     <dd class="col-2" style="<?php echo $req_send_btn_style;?>"><a href="send_reserve_form.php" class="btn btn-sm btn-info"><i class="fa fa-share-square-o" aria-hidden="true"></i> ยื่นคำร้องขอเข้าพัก</a></dd>
+
+                    <dt class="col-12 col-sm-4">การเชื่อมต่อ LINE Account</dt>
+                    <!--
+                    <dd class="col-5"><?php echo $u_completed_line; ?></dd>
+                    <dd class="col-2"><button class="btn btn-sm  btn-info"><i class="fa fa-cog" aria-hidden="true"></i> ตั้งค่า</button></dd>
+                    -->
+                    <dd class="col-5">สแกน QR Code</dd>
+                    <dd class="col-2"><img src="assets/images/H5JSnCku4F.png" width="230px" alt="..." class="img-thumbnail"></dd>
+
 
                 </dl>
             </div>
@@ -201,6 +206,7 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
 </div>
 
 <!-- Order of Reservation -->
+<!--
 <div class="row mt-3">    
     <div class="col">
         <div class="card">
@@ -219,6 +225,7 @@ if(isset($USER_STATE) && $USER_STATE==0){ // Normal Member ?>
         </div>
     </div>
 </div>
+-->
 
 <?php
 } ?>

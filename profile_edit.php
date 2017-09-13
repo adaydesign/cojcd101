@@ -28,7 +28,7 @@
             <div class="card-header pb-0 border-bottom-0">
                 <nav class="nav nav-tabs" id="profile-tab" role="tablist">
                     <a class="nav-item nav-link active" id="nav-edit-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-expanded="true"><i class="fa fa-address-card-o" aria-hidden="true"></i> แก้ไขข้อมูลส่วนตัว</a>
-                    <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password"><i class="fa fa-lock" aria-hidden="true"></i> เปลี่ยนรหัสผ่าน</a>
+                    <!-- <a class="nav-item nav-link" id="nav-password-tab" data-toggle="tab" href="#nav-password" role="tab" aria-controls="nav-password"><i class="fa fa-lock" aria-hidden="true"></i> เปลี่ยนรหัสผ่าน</a> -->
                 </nav>
             </div>
             <div class="card-body">
