@@ -77,7 +77,7 @@ foreach ($events as $event) {
         );
         $img_url = "https://cojcd101.herokuapp.com/assets/images/bg12.png";
         $button = new ButtonTemplateBuilder("ระบบบริหารจัดการห้องพักศาลยุติธรรม", "ในเขตกรุงเทพมหานคร", $img_url, $actions);
-        $outputText = new TemplateMessageBuilder("", $button);
+        $outputText = new TemplateMessageBuilder("Button template builder", $button);
 
         $bot->replyMessage($event->getReplyToken(), $outputText);
       }else if(strcmp($cmd_head,CMD_REGISTER)===0){
