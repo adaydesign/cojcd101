@@ -12,7 +12,6 @@ use \LINE\LINEBot\HTTPClient;
 use \LINE\LINEBot\HTTPClient\CurlHTTPClient;
 use \LINE\LINEBot\MessageBuilder;
 use \LINE\LINEBot\MessageBuilder\TextMessageBuilder;
-use \LINE\LINEBot\Event\MessageEvent\TextMessage;
 
 $httpClient = new CurlHTTPClient(LINEBOT_ACCESS_TOKEN);
 $bot = new LINEBot($httpClient, ['channelSecret' => LINEBOT_CHANNEL_SECRET]);
@@ -32,14 +31,14 @@ try {
 
 //-------------- //
 foreach ($events as $event) {
-    
+
     // Message Event = TextMessage
-    if (($event instanceof TextMessage)) {
+    if (($event instanceof \LINE\LINEBot\Event\MessageEvent\TextMessage)) {
       // get message text
       $messageText=strtolower(trim($event->getText()));
       
-
-      $outputText = new TextMessageBuilder(">> $messageText".);
+      // reply message
+      $outputText = new TextMessageBuilder(">> $messageText");
       $bot->replyMessage($event->getReplyToken(), $outputText);
     }
   }  
