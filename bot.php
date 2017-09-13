@@ -71,27 +71,13 @@ foreach ($events as $event) {
         //cmd : search
       }else if(strcmp($cmd_head,CMD_LIST)===0){
         //cmd : list
-        /*
-        $columns = array();
-        $img_url = "https://cojcd101.herokuapp.com/assets/images/bg12.png";
-        
-        $actions = array(
-            new UriTemplateActionBuilder("View","https://cojcd101.herokuapp.com/list_requesters.php")
-        );
-        $column = new CarouselColumnTemplateBuilder("รายชื่อผู้รอจัดสรรเข้าพักฯ", "", $img_url , $actions);
-        $columns[] = $column;
-        
-        $carousel = new CarouselTemplateBuilder($columns);
-        $outputText = new TemplateMessageBuilder("Carousel Demo", $carousel);
-
-        $bot->replyMessage($event->getReplyToken(), $outputText);*/
 
         $actions = array (
             New UriTemplateActionBuilder("รายชื่อผู้รอจัดสรรเข้าพักฯ", "https://cojcd101.herokuapp.com/list_requesters.php")
         );
         $img_url = "https://cojcd101.herokuapp.com/assets/images/bg12.png";
-        $button = new ButtonTemplateBuilder("button text", "description", $img_url, $actions);
-        $outputText = new TemplateMessageBuilder("this message to use the phone to look to the Oh", $button);
+        $button = new ButtonTemplateBuilder("ระบบบริหารจัดการห้องพักศาลยุติธรรม", "ในเขตกรุงเทพมหานคร", $img_url, $actions);
+        $outputText = new TemplateMessageBuilder("", $button);
 
         $bot->replyMessage($event->getReplyToken(), $outputText);
       }else if(strcmp($cmd_head,CMD_REGISTER)===0){
