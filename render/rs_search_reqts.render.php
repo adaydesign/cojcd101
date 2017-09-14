@@ -34,7 +34,8 @@
                     INNER JOIN tb_bkk_courts ON tb_bkk_courts.id = tb_users.office_id
                     WHERE tb_building_select.building_id=:building_id AND 
                     ($level_cond_text) AND
-                    (tb_reserve_form.form_status=4 OR tb_reserve_form.form_status=2)";
+                    (tb_reserve_form.form_status=4 OR tb_reserve_form.form_status=2)
+                    ORDER BY tb_reserve_form.register_date";
         
             $db->query($sql);
             $db->bind(":building_id",$building);
